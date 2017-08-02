@@ -1,0 +1,11 @@
+name: WelcomeOnHumineCraft
+author: Aymegike
+version: 1.0
+main: com.aymegike.bvn.Main
+commands:
+    guide:
+        description: obtenir le livre de regle.
+    downloadpack:
+        description: permet de telecharger le texturepack du serveur.
+    next:
+        description: permet de passer a la suite de la cinematique(ne pas utiliser en jeu)
