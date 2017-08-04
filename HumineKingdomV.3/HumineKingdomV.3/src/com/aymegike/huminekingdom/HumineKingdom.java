@@ -60,6 +60,8 @@ public class HumineKingdom extends JavaPlugin{
 	}
 	
 	public void onDisable(){
+		System.out.println("useless modif");
+
 		//register location for dragon eegs
 		File file = new File("./plugins/HumineKingdom/config.yml");
 		file.delete();
