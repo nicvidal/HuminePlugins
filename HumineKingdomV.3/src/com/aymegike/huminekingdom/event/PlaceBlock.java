@@ -165,7 +165,7 @@ public class PlaceBlock implements Listener{
 		for(Zone zone : ZoneManager.getAllZones()){
 			if(zone.playerIsInZone(p)){
 				if(!zone.playerCanBuild(p)){
-					if(b.getType() != Material.TNT && b.getType() != Material.FIRE){
+					if(b.getType() != Material.TNT && b.getType() != Material.FIRE && b.getType() != Material.REDSTONE_TORCH_OFF && b.getType() != Material.REDSTONE_TORCH_ON && b.getType() != Material.TORCH){
 						e.setCancelled(true);
 						p.sendMessage(ChatColor.DARK_PURPLE+"Cette zone est protégée par un champ de force de "+ChatColor.BLUE+zone.getKingdom().getName()+ChatColor.DARK_PURPLE+" !");
 						p.playSound(p.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, 5, 5);

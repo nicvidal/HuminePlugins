@@ -80,7 +80,7 @@ public class GetName implements Listener{
 					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
 					MenuList.InvitationMenu(HumineKingdom.getPlayerkingdom(Bukkit.getOfflinePlayer(p.getName())), p).openForPlayer(Bukkit.getPlayer(msg));
 				}else{
-					p.sendMessage(ChatColor.DARK_PURPLE+msg+" fait déja parti d'un royaume !");
+					p.sendMessage(ChatColor.DARK_PURPLE+msg+" fait déja partie d'un royaume !");
 					p.playSound(p.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, 5, 5);
 				}
 				
@@ -96,7 +96,7 @@ public class GetName implements Listener{
 		}
 		else if(getNameOfGrade.contains(p)){
 			e.setCancelled(true);		
-			String msg = e.getMessage();
+			String msg = e.getMessage().replace("/", "").replace("\\", "").replace(":", "").replace("*", "").replace("?", "").replace("*", "").replace("|", "").replace(">", "").replace("<", "");
 			File file = new File(HumineKingdom.getPlayerkingdom(p).getKigndomFile()+"/grade/"+msg);
 			if(file.exists()){
 				p.sendMessage(ChatColor.RED+msg+" existe deja !");

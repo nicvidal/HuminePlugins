@@ -100,7 +100,7 @@ public class BreakBlock implements Listener{
 		for(Zone zone : ZoneManager.getAllZones()){
 			if(zone.playerIsInZone(p)){
 				if(zone.playerCanBreak(p) == false){
-					if(b.getType() != Material.TNT && b.getType() != Material.FIRE){
+					if(b.getType() != Material.TNT && b.getType() != Material.FIRE && b.getType() != Material.REDSTONE_TORCH_OFF && b.getType() != Material.REDSTONE_TORCH_ON && b.getType() != Material.TORCH){
 						active = true;
 						e.setCancelled(true);
 						p.sendMessage(ChatColor.DARK_PURPLE+"Cette Zone est protégée par un champ de force de "+ChatColor.BLUE+zone.getKingdom().getName()+ChatColor.DARK_PURPLE+" !");

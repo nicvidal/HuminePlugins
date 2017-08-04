@@ -357,7 +357,7 @@ public class MenuManager implements Listener{
 			  }
 			  
 			  //CHOSE GRADE
-			  else if(e.getInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_PURPLE+"Choisire un grade")){
+			  else if(e.getInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_PURPLE+"Choisir un grade")){
 				  e.setCancelled(true);
 				  if(e.getCurrentItem().getType() == Material.BARRIER){
 					  p.playSound(p.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 5, 5);

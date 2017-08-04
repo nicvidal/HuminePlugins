@@ -597,7 +597,7 @@ public class MenuList {
 				multi++;
 			}
 		}
-		Menu menu = new Menu(ChatColor.DARK_PURPLE+"Choisire un grade", (multi+1)*9, k);
+		Menu menu = new Menu(ChatColor.DARK_PURPLE+"Choisir un grade", (multi+1)*9, k);
 		
 		ItemStack membre = new ItemStack(Material.SKULL_ITEM, 1, (byte) SkullType.PLAYER.ordinal());
 		SkullMeta membrem = (SkullMeta) membre.getItemMeta();

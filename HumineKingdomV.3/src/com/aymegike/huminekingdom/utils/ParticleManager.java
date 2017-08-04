@@ -69,19 +69,32 @@ public class ParticleManager {
 			}
 		}, 1, 0);
 		
+		Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doFireTick false");
+		
+		
+		
 		task2 = Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("HumineKingdom"), new Runnable(){
+			
+			boolean fire = false;
+			
 			@Override
 			public void run() {
-				new Location(world, loc.getX(), loc.getY()+maxHeight, loc.getZ()).getBlock().setType(Material.DRAGON_EGG);
-				world.strikeLightning(new Location(world, loc.getX(), loc.getY()+maxHeight, loc.getZ()));
-				Bukkit.getScheduler().cancelTask(task2);
-				PacketPlayOutWorldParticles particle = new PacketPlayOutWorldParticles(EnumParticle.EXPLOSION_HUGE, false,
-						((float) (loc.getX() +0.5)), 
-						((float) (loc.getY() +maxHeight)), 
-						((float) (loc.getZ() +0.5)),
-						0, 0, 0, 1, 0, null);
-				for(Player pls : Bukkit.getOnlinePlayers()){
-					((CraftPlayer)pls).getHandle().playerConnection.sendPacket(particle);
+				if(fire == false){
+					new Location(world, loc.getX(), loc.getY()+maxHeight, loc.getZ()).getBlock().setType(Material.DRAGON_EGG);
+					world.strikeLightning(new Location(world, loc.getX(), loc.getY()+maxHeight, loc.getZ()));
+					
+					PacketPlayOutWorldParticles particle = new PacketPlayOutWorldParticles(EnumParticle.EXPLOSION_HUGE, false,
+							((float) (loc.getX() +0.5)), 
+							((float) (loc.getY() +maxHeight)), 
+							((float) (loc.getZ() +0.5)),
+							0, 0, 0, 1, 0, null);
+					for(Player pls : Bukkit.getOnlinePlayers()){
+						((CraftPlayer)pls).getHandle().playerConnection.sendPacket(particle);
+					}
+					fire = true;
+				}else{
+					Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "gamerule doFireTick true");
+					Bukkit.getScheduler().cancelTask(task2);
 				}
 			}
 		}, 20*5, 20*5);
