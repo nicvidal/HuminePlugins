@@ -45,6 +45,7 @@ public class HumineKingdom extends JavaPlugin{
 	}
 	
 	public void onEnable(){
+		System.out.println("Useless Modif");
 		System.out.println("---------------------------------------------------------------------------------");
 		System.out.println("[HumineKingdom] Aymegike production !");
 		System.out.println("---------------------------------------------------------------------------------");
