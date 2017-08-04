@@ -45,6 +45,9 @@ public class HumineKingdom extends JavaPlugin{
 	}
 	
 	public void onEnable(){
+		System.out.println("Modification de l'autre n°1");
+		System.out.println("Modification de l'autre n°2");
+		System.out.println("Modification de l'autre n°3");
 		System.out.println("---------------------------------------------------------------------------------");
 		System.out.println("[HumineKingdom] Aymegike production !");
 		System.out.println("---------------------------------------------------------------------------------");
