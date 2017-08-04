@@ -45,7 +45,6 @@ public class HumineKingdom extends JavaPlugin{
 	}
 	
 	public void onEnable(){
-		System.out.println("Useless Modif");
 		System.out.println("---------------------------------------------------------------------------------");
 		System.out.println("[HumineKingdom] Aymegike production !");
 		System.out.println("---------------------------------------------------------------------------------");
@@ -61,8 +60,6 @@ public class HumineKingdom extends JavaPlugin{
 	}
 	
 	public void onDisable(){
-		System.out.println("useless modif");
-
 		//register location for dragon eegs
 		File file = new File("./plugins/HumineKingdom/config.yml");
 		file.delete();
