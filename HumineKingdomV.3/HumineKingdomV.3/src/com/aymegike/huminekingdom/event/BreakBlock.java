@@ -1,6 +1,5 @@
 package com.aymegike.huminekingdom.event;
 
-import java.util.Calendar;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -27,8 +26,27 @@ import net.md_5.bungee.api.ChatColor;
 
 public class BreakBlock implements Listener{
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerClick(PlayerInteractEvent e){
+		
+		if(e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
+			if(e.getClickedBlock().getType() == Material.BEACON){
+				for(Zone zones : ZoneManager.getAllZones()){
+					if(zones.playerIsInZone(e.getPlayer()))
+						if(!zones.playerCanBuild(e.getPlayer()) && !zones.playerCanBreak(e.getPlayer())){
+							e.setCancelled(true);
+						}
+				}
+			}if(e.getPlayer().getItemInHand().getType() == Material.LAVA_BUCKET){
+				for(Zone zones : ZoneManager.getAllZones()){
+					if(zones.playerIsInZone(e.getPlayer()))
+						if(!zones.playerCanBuild(e.getPlayer()))
+							e.setCancelled(true);
+				}
+			}
+		}
+		
 		if(e.getAction().equals(Action.LEFT_CLICK_BLOCK) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)){
 			if(HumineKingdom.getPlayerkingdom(e.getPlayer()) == null && e.getClickedBlock().getType() == Material.DRAGON_EGG){
 				e.setCancelled(true);
@@ -36,7 +54,7 @@ public class BreakBlock implements Listener{
 				e.getPlayer().sendMessage(ChatColor.YELLOW+"Si tu veux interagire avec l'oeuf tu dois avoir un royaume !");
 				return;
 			}
-			if(e.getClickedBlock().getType().equals(Material.DRAGON_EGG) && HumineKingdom.GIVED == false){
+			if(e.getClickedBlock().getType().equals(Material.DRAGON_EGG)){
 				e.setCancelled(true);
 				Player p = e.getPlayer();
 				if(p.getItemOnCursor().getType() == Material.AIR){
@@ -61,14 +79,6 @@ public class BreakBlock implements Listener{
 				}else{
 					p.sendMessage(ChatColor.DARK_PURPLE+"[OEUF] -> Les mains vide uniquement, me recupérer vous pourrez !");
 				}
-			}else if(e.getClickedBlock().getType().equals(Material.DRAGON_EGG) && HumineKingdom.GIVED == true){
-				e.setCancelled(true);
-				e.getPlayer().sendMessage(ChatColor.DARK_PURPLE+"Vous venez de récuperer la récompense !");
-				ParticleManager.downGivedParticle();
-				@SuppressWarnings("deprecation")
-				int day = Calendar.getInstance().getTime().getDay();
-				HumineKingdom.DAY = day;
-				ParticleManager.popGived(e.getClickedBlock().getLocation());
 			}
 		}
 	}

@@ -155,7 +155,13 @@ public class PlaceBlock implements Listener{
 			Location loc = new Location(Bukkit.getWorlds().get(0), b.getLocation().getBlockX(), y, b.getLocation().getBlockZ());
 			if(loc.getBlock().getType() != Material.AIR){
 				if(loc.getBlock().getType() == Material.BEACON){
-					e.setCancelled(true);
+					for(Zone zone : ZoneManager.getAllZones()){
+						if(zone.playerIsInZone(p)){
+							if(!zone.playerCanBuild(p)){
+								e.setCancelled(true);
+							}
+						}
+					}
 				}
 				stop = true;
 			}

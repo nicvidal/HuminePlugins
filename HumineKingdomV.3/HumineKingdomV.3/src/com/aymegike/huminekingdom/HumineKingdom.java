@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,7 +13,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.aymegike.huminekingdom.event.EventManager;
-import com.aymegike.huminekingdom.utils.Clock;
 import com.aymegike.huminekingdom.utils.GradeManager;
 import com.aymegike.huminekingdom.utils.KingdomManager;
 import com.aymegike.huminekingdom.utils.ParticleManager;
@@ -32,13 +30,9 @@ public class HumineKingdom extends JavaPlugin{
 	static File grade;
 	static File kingdom; 
 	static File zone;
-	
-	public static int DAY;
 
 	static FileConfiguration config;
 	private static Location loceegs;
-	
-	public static boolean GIVED = false;
 	
 	public static  HumineKingdom getInstance(){
 		return hk;
@@ -55,7 +49,6 @@ public class HumineKingdom extends JavaPlugin{
 		GradeManager.loadGrades();//register grade in variable
 		ZoneManager.loadZone();//register zones in variable
 		TeamManager.createTeams();
-		Clock.clock();
 		
 	}
 	
@@ -84,8 +77,6 @@ public class HumineKingdom extends JavaPlugin{
 					print.println("     z: 0");
 					
 				}
-				print.println();
-				print.println("day: "+DAY);
 			}catch(IOException e){
 				e.printStackTrace();
 			}
@@ -136,8 +127,6 @@ public class HumineKingdom extends JavaPlugin{
 		
 		File file = new File("./plugins/HumineKingdom/config.yml");
 		new File("./plugins/HumineKingdom").mkdirs();
-		@SuppressWarnings("deprecation")
-		int day = Calendar.getInstance().getTime().getDay();
 		if(!file.exists()){
 			System.out.println("generate configFile !");
 			try{
@@ -151,8 +140,6 @@ public class HumineKingdom extends JavaPlugin{
 				print.println("     x: 0");
 				print.println("     y: 0");
 				print.println("     z: 0");
-				print.println();
-				print.println("day: "+day);
 			}catch(IOException e){
 				e.printStackTrace();
 			}
@@ -163,16 +150,6 @@ public class HumineKingdom extends JavaPlugin{
 			setLocation(new Location(Bukkit.getWorlds().get(0), config.getInt("location.dragon.x"), config.getInt("location.dragon.y"), config.getInt("location.dragon.z")));
 			ParticleManager.loadParticle(new Location(Bukkit.getWorlds().get(0), config.getInt("location.dragon.x"), config.getInt("location.dragon.y"), config.getInt("location.dragon.z")));
 			
-		}
-		DAY = config.getInt("day");
-	}
-	
-	public static void isTime(){
-		@SuppressWarnings("deprecation")
-		int test = Calendar.getInstance().getTime().getDay();
-		if(test != DAY && loceegs.getBlockX() != 0 && loceegs.getBlockY() != 0 && loceegs.getBlockZ() != 0){
-			ParticleManager.presentParticle(loceegs);
-			DAY = test;
 		}
 	}
 	
