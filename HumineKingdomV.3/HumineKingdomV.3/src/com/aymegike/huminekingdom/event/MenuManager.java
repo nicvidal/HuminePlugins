@@ -113,7 +113,7 @@ public class MenuManager implements Listener{
 								  op.getPlayer().closeInventory();
 							  }
 						  }
-						  HumineKingdom.getPlayerkingdom(p).delet();
+						  HumineKingdom.getPlayerkingdom(p).delete();
 						  return;
 					  }else{
 						  for(OfflinePlayer op : HumineKingdom.getPlayerkingdom(p).getAllMember()){

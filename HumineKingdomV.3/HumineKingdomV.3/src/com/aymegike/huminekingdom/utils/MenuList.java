@@ -528,7 +528,7 @@ public class MenuList {
 	
 	//GRADE LIST
 	public static Menu gradeListMenu(Kingdom k){
-		File file = new File(k.getKigndomFile()+"/grade");
+		File file = new File(k.getKingdomFile()+"/grade");
 		File[] chil = file.listFiles();
 		int size = chil.length;
 		int c = 0;
@@ -585,7 +585,7 @@ public class MenuList {
 	
 	public static Menu choseGrade(Kingdom k, OfflinePlayer p){
 		
-		File file = new File(k.getKigndomFile()+"/grade");
+		File file = new File(k.getKingdomFile()+"/grade");
 		File[] chil = file.listFiles();
 		int size = chil.length;
 		int c = 0;

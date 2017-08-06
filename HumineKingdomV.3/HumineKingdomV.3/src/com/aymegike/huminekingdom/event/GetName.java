@@ -97,7 +97,7 @@ public class GetName implements Listener{
 		else if(getNameOfGrade.contains(p)){
 			e.setCancelled(true);		
 			String msg = e.getMessage().replace("/", "").replace("\\", "").replace(":", "").replace("*", "").replace("?", "").replace("*", "").replace("|", "").replace(">", "").replace("<", "");
-			File file = new File(HumineKingdom.getPlayerkingdom(p).getKigndomFile()+"/grade/"+msg);
+			File file = new File(HumineKingdom.getPlayerkingdom(p).getKingdomFile()+"/grade/"+msg);
 			if(file.exists()){
 				p.sendMessage(ChatColor.RED+msg+" existe deja !");
 				p.playSound(p.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, 5, 5);

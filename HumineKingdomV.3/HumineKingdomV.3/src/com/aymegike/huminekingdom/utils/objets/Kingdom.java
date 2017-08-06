@@ -26,10 +26,12 @@ public class Kingdom {
 	String name;
 	File member; 
 	File kingdom;
+	int glory;
 	
 	@SuppressWarnings("deprecation")
 	public Kingdom(String name){
 		this.name = name;
+		this.glory = 50;
 		kingdom = new File("./plugins/HumineKingdom/Kingdom/"+name);
 		kingdom.mkdirs();
 		member = new File("./plugins/HumineKingdom/Kingdom/"+name+"/member.yml");
@@ -48,8 +50,7 @@ public class Kingdom {
 			}
 		}catch(IOException ex){
 			ex.printStackTrace();
-		}
-		
+		}		
 	}
 		
 	//geters
@@ -91,7 +92,19 @@ public class Kingdom {
 		return name;
 	}
 	
-	public String getKigndomFile(){
+	public int getGlory() {
+		return glory;
+	}
+	
+	public void increaseGlory(int points) {
+		glory += points;
+	}
+	
+	public void decreaseGlory(int points) {
+		glory -= points; //Allow negative glory ?
+	}
+	
+	public String getKingdomFile(){
 		return kingdom.getAbsolutePath();
 	}
 	
@@ -139,7 +152,7 @@ public class Kingdom {
 				e.printStackTrace();
 			}
 		}
-		uptade();
+		update();
 	}
 	
 	public void removeMember(OfflinePlayer offlinePlayer){
@@ -193,10 +206,10 @@ public class Kingdom {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		uptade();
+		update();
 	}
 	
-	public void delet(){
+	public void delete(){
 		System.out.println(pls.size());
 		ArrayList<OfflinePlayer> tempo = new ArrayList<OfflinePlayer>();
 		
@@ -216,8 +229,7 @@ public class Kingdom {
 				System.out.println("delet: "+grades.getName()+" of "+kingdom.getName());
 				grades.delete();
 			}
-		}
-		
+		}	
 		
 		for(Zone zones : ZoneManager.getAllZones())
 			if(zones.getKingdom().getName().equalsIgnoreCase(name)){
@@ -230,7 +242,7 @@ public class Kingdom {
 		ZoneManager.refresh();
 	}
 	
-	private void uptade(){
+	private void update(){
 		for(OfflinePlayer op : pls){
 			if(op.isOnline()){
 				if(op.getPlayer().getOpenInventory().getTitle().equalsIgnoreCase(ChatColor.DARK_PURPLE+"Membres "+ChatColor.WHITE+name)
@@ -241,8 +253,7 @@ public class Kingdom {
 				}
 			}
 		}
-	}
-	
+	}	
 	
 	private static boolean deleteDir(File dir) {
 		if (dir.isDirectory()) {
@@ -256,5 +267,4 @@ public class Kingdom {
 		// The directory is now empty so delete it
 		return dir.delete();
 	}
-
 }
