@@ -849,7 +849,9 @@ public class MenuList {
 						
 			int slot = 0;
 			
-			for(Kingdom k : KingdomManager.getKingdoms()){
+			KingdomManager.sort(); //re sort if glory has changed since last save
+			
+			for(Kingdom k : KingdomManager.getKingdoms().subList( 0, top )){
 				String name = k.getKing().getName();
 				ItemStack membre = new ItemStack(Material.SKULL_ITEM, 1, (byte) SkullType.PLAYER.ordinal());
 				SkullMeta membrem = (SkullMeta) membre.getItemMeta();

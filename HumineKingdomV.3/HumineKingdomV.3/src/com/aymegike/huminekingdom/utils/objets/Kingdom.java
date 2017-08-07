@@ -34,9 +34,9 @@ public class Kingdom implements Comparable{
 	int glory;
 	
 	@SuppressWarnings("deprecation")
-	public Kingdom(String name){
+	public Kingdom(String name, int glory){
 		this.name = name;
-		this.glory = 50;
+		this.glory = glory;
 		kingdom = new File("./plugins/HumineKingdom/Kingdom/"+name);
 		kingdom.mkdirs();
 		member = new File("./plugins/HumineKingdom/Kingdom/"+name+"/member.yml");
@@ -56,7 +56,19 @@ public class Kingdom implements Comparable{
 		}
 		catch(IOException ex){
 			ex.printStackTrace();
-		}		
+		}
+		
+		try {		    
+		    BufferedWriter out = new BufferedWriter(new FileWriter(HumineKingdom.getDataKingdom(), true));
+		    out.write(name + " = glory = " + glory);
+		    out.newLine();		    	    
+		    out.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+		
 	}
 	
 	//geters

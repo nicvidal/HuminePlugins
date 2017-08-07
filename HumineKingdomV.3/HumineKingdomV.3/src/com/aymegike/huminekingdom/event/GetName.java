@@ -43,7 +43,7 @@ public class GetName implements Listener{
 					return;
 				}
 				p.sendMessage(ChatColor.GREEN+"[HumineKingdom] Felicitation ! "+msg+" rejoint la course vers la gloire !");
-				Kingdom k = new Kingdom(msg);
+				Kingdom k = new Kingdom(msg, 50);
 				k.addMember(p, true, true);
 				KingdomManager.setKingdom(k);
 				Grade g = new Grade("King", k, true);

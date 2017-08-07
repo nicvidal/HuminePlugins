@@ -1,9 +1,15 @@
 package com.aymegike.huminekingdom.utils;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.aymegike.huminekingdom.HumineKingdom;
 import com.aymegike.huminekingdom.utils.objets.Kingdom;
 
 public class KingdomManager {
@@ -12,11 +18,22 @@ public class KingdomManager {
 
 	public static void loadKingdom(){
 		kingdoms.clear();
-		File kingdom = new File("./plugins/HumineKingdom/Kingdom");
-		File[] path = kingdom.listFiles();
-		for(int i = 0 ; i<path.length ; i++){
-			Kingdom k = new Kingdom(path[i].getName());
-			kingdoms.add(k);	
+		
+		try {
+		    BufferedReader in = new BufferedReader(new FileReader(HumineKingdom.getDataKingdom()));
+		    
+		    String line;
+		    while ((line = in.readLine()) != null) {
+		    	if (line.split(" = ")[1].equals("glory")) {
+					Kingdom k = new Kingdom(line.split(" = ")[0], Integer.parseInt(line.split(" = ")[2]));
+					kingdoms.add(k);	
+		    	}
+		    }
+		    in.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
 		}
 		sort();
 	}

@@ -59,7 +59,7 @@ public class HumineKingdom extends JavaPlugin{
 	}
 	
 	public void onDisable(){
-		//register location for dragon eegs
+		//register location for dragon egg
 		File file = new File("./plugins/HumineKingdom/config.yml");
 		file.delete();
 		if(!file.exists()){
