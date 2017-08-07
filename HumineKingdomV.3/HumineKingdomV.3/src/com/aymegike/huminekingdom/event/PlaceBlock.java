@@ -168,8 +168,7 @@ public class PlaceBlock implements Listener{
 					}
 				}
 				stop = true;
-			}
-			
+			}			
 		}
 		
 		for(Zone zone : ZoneManager.getAllZones()){

@@ -56,7 +56,7 @@ public class Kingdom {
 			ex.printStackTrace();
 		}		
 	}
-		
+	
 	//geters
 	public ArrayList<OfflinePlayer> getAllMember(){
 		return pls;
@@ -105,25 +105,26 @@ public class Kingdom {
 		    BufferedReader in = new BufferedReader(new FileReader(HumineKingdom.getDataKingdom()));
 		    
 		    ArrayList<String> lines = new ArrayList<String>();
-		    String line = in.readLine(); //skip the first line to not copy it
+		    String line;
 		    while ((line = in.readLine()) != null) {
-		    	System.out.println(line);
 		    	lines.add(line);
 		    }
 		    in.close();
-		    BufferedWriter out = new BufferedWriter(new FileWriter(HumineKingdom.getDataKingdom()));		    
-		    out.write("Glory = " + glory);  //Replace with the string you are trying to write
-		    out.newLine();
+		    BufferedWriter out = new BufferedWriter(new FileWriter(HumineKingdom.getDataKingdom()));
 		    for (String l:lines) {
-		    	out.write(l);
+		    	if (l.split(" = ")[0].equals(name) && l.split(" = ")[1].equals("glory")) {
+		    		out.write(name + " = glory = " + glory);
+		    	}
+		    	else {
+		    		out.write(l);
+		    	}
 		    	out.newLine();
 		    }		    
 		    out.close();
 		}
 		catch (IOException e)
 		{
-		    System.out.println(e.getMessage());
-		    System.out.println("Exception ");
+			e.printStackTrace();
 		}
 	}
 	
