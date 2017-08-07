@@ -83,14 +83,7 @@ public class HumineKingdom extends JavaPlugin{
 		}
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	public void loadAllFiles(){
 		
@@ -181,7 +174,7 @@ public class HumineKingdom extends JavaPlugin{
 		return null;
 	}
 	
-	public static Location getEegsLog(){
+	public static Location getEggLog(){
 		return loceegs;
 	}
 	

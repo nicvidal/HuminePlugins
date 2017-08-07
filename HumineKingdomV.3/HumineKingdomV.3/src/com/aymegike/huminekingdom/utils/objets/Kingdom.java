@@ -1,8 +1,12 @@
 package com.aymegike.huminekingdom.utils.objets;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -96,12 +100,41 @@ public class Kingdom {
 		return glory;
 	}
 	
+	private void updateGlory() {
+		try {
+		    BufferedReader in = new BufferedReader(new FileReader(HumineKingdom.getDataKingdom()));
+		    
+		    ArrayList<String> lines = new ArrayList<String>();
+		    String line = in.readLine(); //skip the first line to not copy it
+		    while ((line = in.readLine()) != null) {
+		    	System.out.println(line);
+		    	lines.add(line);
+		    }
+		    in.close();
+		    BufferedWriter out = new BufferedWriter(new FileWriter(HumineKingdom.getDataKingdom()));		    
+		    out.write("Glory = " + glory);  //Replace with the string you are trying to write
+		    out.newLine();
+		    for (String l:lines) {
+		    	out.write(l);
+		    	out.newLine();
+		    }		    
+		    out.close();
+		}
+		catch (IOException e)
+		{
+		    System.out.println(e.getMessage());
+		    System.out.println("Exception ");
+		}
+	}
+	
 	public void increaseGlory(int points) {
 		glory += points;
+		updateGlory();
 	}
 	
 	public void decreaseGlory(int points) {
 		glory -= points; //Allow negative glory ?
+		updateGlory();
 	}
 	
 	public String getKingdomFile(){

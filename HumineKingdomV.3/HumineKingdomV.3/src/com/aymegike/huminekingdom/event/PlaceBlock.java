@@ -23,6 +23,15 @@ public class PlaceBlock implements Listener{
 	int task;
 	int timer = 20;
 	
+	/********************************************
+	 *      Permissions/Interdictions           *
+	 ********************************************/
+	
+	
+	/**********************************
+	 * 
+	 * @param e
+	 */
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerPlaceBlock(BlockPlaceEvent e){
@@ -135,14 +144,9 @@ public class PlaceBlock implements Listener{
 						new Location(p.getWorld(), b.getLocation().getBlockX(), b.getLocation().getBlockY()-1, b.getLocation().getBlockZ()).getBlock().setType(Material.PURPUR_BLOCK);
 					}else if(new Location(p.getWorld(), b.getLocation().getBlockX(), b.getLocation().getBlockY()-1, b.getLocation().getBlockZ()).getBlock().getType() == Material.PURPUR_BLOCK){
 						new Location(p.getWorld(), b.getLocation().getBlockX(), b.getLocation().getBlockY()-1, b.getLocation().getBlockZ()).getBlock().setType(Material.QUARTZ_BLOCK);
-					}
-					
-					
-				}
-				
-			},5, 5);
-			
-			
+					}					
+				}				
+			},5, 5);			
 		}
 		
 		int y = b.getLocation().getBlockY();
@@ -176,6 +180,24 @@ public class PlaceBlock implements Listener{
 						p.sendMessage(ChatColor.DARK_PURPLE+"Cette zone est protégée par un champ de force de "+ChatColor.BLUE+zone.getKingdom().getName()+ChatColor.DARK_PURPLE+" !");
 						p.playSound(p.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, 5, 5);
 					}
+				}
+			}
+		}
+
+		/********************************************
+		 *      Gain/Perte de gloire                *
+		 ********************************************/
+		
+		if(b.getType().equals(Material.TNT)){
+			if(HumineKingdom.getPlayerkingdom(p) != null){
+				boolean isAtHome = false;
+				for(Zone zone : ZoneManager.getAllZones()){
+					if(zone.playerIsInZone(p) && zone.getKingdom().containPlayer(p)){
+						isAtHome = true;
+					}
+				}
+				if (!isAtHome) {
+					HumineKingdom.getPlayerkingdom(p).decreaseGlory(5);
 				}
 			}
 		}

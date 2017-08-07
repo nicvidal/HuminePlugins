@@ -74,8 +74,7 @@ public class MenuList {
 		
 		menu.addItem(emerald, 13);
 		menu.addItem(accept, 10);
-		menu.addItem(decline, 16);
-		
+		menu.addItem(decline, 16);		
 		
 		return menu;
 	}
@@ -208,8 +207,6 @@ public class MenuList {
 		menu.addItem(grade, 16);
 		menu.addItem(classement, 40);
 		menu.addItem(quit, 44);
-		
-		
 		
 		return menu;
 	}
