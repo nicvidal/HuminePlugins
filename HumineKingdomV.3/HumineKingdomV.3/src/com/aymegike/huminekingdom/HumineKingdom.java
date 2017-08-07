@@ -1,9 +1,14 @@
 package com.aymegike.huminekingdom;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -34,6 +39,8 @@ public class HumineKingdom extends JavaPlugin{
 	static FileConfiguration config;
 	private static Location loceegs;
 	
+	static ArrayList<Kingdom> ranking;
+	
 	public static  HumineKingdom getInstance(){
 		return hk;
 	}
@@ -48,8 +55,7 @@ public class HumineKingdom extends JavaPlugin{
 		KingdomManager.loadKingdom();//register kingdom in variable
 		GradeManager.loadGrades();//register grade in variable
 		ZoneManager.loadZone();//register zones in variable
-		TeamManager.createTeams();
-		
+		TeamManager.createTeams();		
 	}
 	
 	public void onDisable(){
@@ -82,8 +88,6 @@ public class HumineKingdom extends JavaPlugin{
 			}
 		}
 	}
-	
-
 	
 	public void loadAllFiles(){
 		

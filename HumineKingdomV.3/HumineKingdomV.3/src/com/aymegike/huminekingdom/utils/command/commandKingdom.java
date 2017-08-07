@@ -22,6 +22,10 @@ public class commandKingdom implements CommandExecutor {
 				MenuList.MainKingdomMenu(HumineKingdom.getPlayerkingdom(p), p).openForPlayer(p);
 			}
 		}
+
+		if(lbl.equalsIgnoreCase("ranking")){
+				MenuList.RankingMenu().openForPlayer(p);
+		}
 		
 		return false;
 	}

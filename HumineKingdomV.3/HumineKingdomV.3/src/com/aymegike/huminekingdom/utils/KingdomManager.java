@@ -2,6 +2,7 @@ package com.aymegike.huminekingdom.utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.aymegike.huminekingdom.utils.objets.Kingdom;
 
@@ -17,8 +18,12 @@ public class KingdomManager {
 			Kingdom k = new Kingdom(path[i].getName());
 			kingdoms.add(k);	
 		}
-		
-		
+		sort();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static void sort() {
+		Collections.sort(kingdoms);
 	}
 	
 	public static ArrayList<Kingdom> getKingdoms(){

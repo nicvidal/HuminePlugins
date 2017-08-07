@@ -827,5 +827,60 @@ public class MenuList {
 		
 	}
 	
+	//Member list
+		@SuppressWarnings("deprecation")
+		public static Menu RankingMenu(){			
+			int top = 10; //number of kingdom in the ranking
+			int c = 0;
+			int nbLine = 1;
+			for(int i = 1 ; i<top-2 ; i++){
+				c++;
+				if(c>=9){				
+					c = 0;
+					nbLine++;
+				}
+			}
+			Menu menu = new Menu(ChatColor.DARK_PURPLE+"Ranking", (nbLine+1)*9, null);
+			ArrayList<String> lore = new ArrayList<String>();
+			ItemStack quit = new ItemStack(Material.BARRIER);
+			ItemMeta quitm = quit.getItemMeta();
+			quitm.setDisplayName(ChatColor.RED+"Quitter");
+			quit.setItemMeta(quitm);
+						
+			int slot = 0;
+			
+			for(Kingdom k : KingdomManager.getKingdoms()){
+				String name = k.getKing().getName();
+				ItemStack membre = new ItemStack(Material.SKULL_ITEM, 1, (byte) SkullType.PLAYER.ordinal());
+				SkullMeta membrem = (SkullMeta) membre.getItemMeta();
+				if(Bukkit.getPlayer(name) == null){
+					membrem.setDisplayName(ChatColor.GREEN+name);
+					membrem.setOwner(Bukkit.getOfflinePlayer(name).getName());
+				}else{
+					membrem.setDisplayName(ChatColor.GREEN+Bukkit.getPlayer(name).getName());
+					membrem.setOwner(Bukkit.getPlayer(name).getName());
+				}
+				if(HumineKingdom.getPlayerGrade(Bukkit.getOfflinePlayer(name)) != null){
+					lore.add(ChatColor.DARK_PURPLE+"Grade: "+ChatColor.WHITE+HumineKingdom.getPlayerGrade(Bukkit.getOfflinePlayer(name)).getName());
+				}
+				membrem.setLore(lore);
+				lore.clear();
+				membre.setItemMeta(membrem);
+				menu.addItem(membre, slot);
+				slot++;
+				}
+			
+			for(int i = menu.getSize()-9 ; i<menu.getSize() ; i++){
+				ItemStack glass = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 10);
+				ItemMeta glassM = glass.getItemMeta();
+				glassM.setDisplayName(" ");
+				glass.setItemMeta(glassM);
+				menu.addItem(glass, i);
+			}
+			
+			menu.addItem(quit, menu.getSize()-1);
+			return menu;
+		}
+	
 
 }

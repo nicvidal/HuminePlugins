@@ -23,8 +23,9 @@ import com.aymegike.huminekingdom.utils.MenuList;
 import com.aymegike.huminekingdom.utils.ZoneManager;
 
 import net.md_5.bungee.api.ChatColor;
+import java.lang.Comparable;
 
-public class Kingdom {
+public class Kingdom implements Comparable{
 	
 	ArrayList<OfflinePlayer> pls = new ArrayList<OfflinePlayer>();
 	String name;
@@ -52,7 +53,8 @@ public class Kingdom {
 			while(sc.hasNext()){
 				pls.add(Bukkit.getOfflinePlayer(sc.nextLine()));
 			}
-		}catch(IOException ex){
+		}
+		catch(IOException ex){
 			ex.printStackTrace();
 		}		
 	}
@@ -90,6 +92,15 @@ public class Kingdom {
 			}
 		}
 		return false;
+	}
+	
+	public OfflinePlayer getKing() {
+		for(OfflinePlayer player : pls){
+            if(HumineKingdom.getPlayerGrade(player).getName().equalsIgnoreCase("King")){
+                return player;
+            }                
+        }
+		return null;
 	}
 	
 	public String getName(){
@@ -301,4 +312,14 @@ public class Kingdom {
 		// The directory is now empty so delete it
 		return dir.delete();
 	}
+	
+	 public int compareTo(Object o) {
+		 Kingdom k = (Kingdom)o;
+	        if (k.getGlory() == this.getGlory())
+	            return 0;
+	        else if (k.getGlory() < this.getGlory())
+	            return 1;
+	        else
+	            return -1;
+	    }
 }
