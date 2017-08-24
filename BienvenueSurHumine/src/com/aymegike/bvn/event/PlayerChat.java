@@ -91,7 +91,7 @@ public class PlayerChat implements Listener{
 				}
 				if(HumineKingdom.getPlayerkingdom(target) != null){
 					if(!target.hasPermission("kingdom.gestion.invite.newplayer")){
-						player.sendMessage(ChatColor.WHITE+msg+ChatColor.DARK_PURPLE+" n'a pas les droit pour vous accepter.");
+						player.sendMessage(ChatColor.WHITE+msg+ChatColor.DARK_PURPLE+" n'a pas les droits pour vous accepter.");
 						player.sendMessage(ChatColor.YELLOW+"Voici la liste des joueurs connectés de son royaume qui peuvent vous accepter:");
 						int i = 0;
 						for(OfflinePlayer pls : HumineKingdom.getPlayerkingdom(target).getAllMember()){

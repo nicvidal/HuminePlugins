@@ -394,7 +394,7 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		buildm.setDisplayName(ChatColor.YELLOW+"kingdom.build");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation à vos joueurs");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de construire dans les zones protegées");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"par vos balises.");
 		lore.add("");
@@ -409,7 +409,7 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		destructm.setDisplayName(ChatColor.YELLOW+"kingdom.break");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation a vos joueurs");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de détruire dans les zones protegées");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"par vos balises.");
 		lore.add("");
@@ -424,8 +424,8 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		gestionm.setDisplayName(ChatColor.YELLOW+"kingdom.gestion.invite");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation a vos joueurs");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"d'inviter d'autres joueurs à rejoindre");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"d'inviter d'autres personnes à rejoindre");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"votre royaume.");
 		lore.add("");
 		lore.add(ChatColor.GOLD+"Cliquez pour choisir.");
@@ -439,9 +439,9 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		invitem.setDisplayName(ChatColor.YELLOW+"kingdom.gestion.invite.newplayer");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation a vos joueurs");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"d'inviter les nouveau joueurs à");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"atterrire sur vos terres.");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de recevoir de nouvelles personnes");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"sur vos terres.");
 		lore.add("");
 		lore.add(ChatColor.GOLD+"Cliquez pour choisir.");
 		invitem.setLore(lore);
@@ -454,9 +454,9 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		sgradem.setDisplayName(ChatColor.YELLOW+"kingdom.gestion.grade");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation a vos joueurs");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de modifier le grade des autres");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"joueurs de votre royaume.");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"personnes de votre royaume.");
 		lore.add("");
 		lore.add(ChatColor.GOLD+"Cliquez pour choisir.");
 		sgradem.setLore(lore);
@@ -469,7 +469,7 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		permm.setDisplayName(ChatColor.YELLOW+"kingdom.gestion.perm");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation a vos joueurs");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de modifier les permissions des");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"différents grades de votre royaume.");
 		lore.add("");
@@ -484,7 +484,7 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		createm.setDisplayName(ChatColor.YELLOW+"kingdom.gestion.create");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation a vos joueurs");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de créer et de supprimer des grades.");
 		lore.add("");
 		lore.add(ChatColor.GOLD+"Cliquez pour choisir.");
@@ -498,7 +498,7 @@ Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, nul
 		chatm.setDisplayName(ChatColor.YELLOW+"kingdom.chat");
 		lore.add("");
 		lore.add(ChatColor.BLUE+"description:");
-		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation a vos joueurs");
+		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"Donne l'autorisation");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de lire et de publier des messages");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"lisible uniquement par les membres");
 		lore.add(ChatColor.DARK_PURPLE+""+ChatColor.ITALIC+"de votre Royaume. Pour ce faire il");

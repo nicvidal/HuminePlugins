@@ -1,5 +1,7 @@
 package com.aymegike.huminekingdom.event;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -57,10 +59,30 @@ public class PlaceBlock implements Listener{
 		int x = loc.getBlockX();
 		int y = loc.getBlockY();
 		int z = loc.getBlockZ();
+		ArrayList<Zone> toDelet = new ArrayList<Zone>();
 		for(int i = x-1 ; i<= x+1 ; i++){
 			for(int i2 = z-1 ; i2<=z+1 ; i2++){
-				new Location(p.getWorld(), i, loc.getBlockY(), i2).getBlock().setType(Material.AIR);
+				for(int i3 = y-1 ; i3 <= y+2 ; i3++){
+					if(new Location(p.getWorld(), i, i3, i2).getBlock().getType() == Material.BEACON){
+						Location location = new Location(p.getWorld(), i, i3, i2);
+						for(Zone zones : ZoneManager.getAllZones()){
+							if(zones.getLocation().getBlockX() == location.getBlockX() && zones.getLocation().getBlockZ() == location.getBlockZ()){
+								toDelet.add(zones);
+							}
+						}
+						
+					}
+				
+					new Location(p.getWorld(), i, i3, i2).getBlock().setType(Material.AIR);
+				}
 			}
+		}
+		
+		for(Zone zones : toDelet){
+			zones.getKingdom().decreaseGlory(null, 300, false);
+			zones.remove();
+			ZoneManager.removeZone(zones);
+			
 		}
 		
 		new Location(p.getWorld(), loc.getBlockX()+1, loc.getBlockY()-1, loc.getBlockZ()).getBlock().setType(Material.BEDROCK);

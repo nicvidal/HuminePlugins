@@ -16,6 +16,8 @@ import com.aymegike.huminekingdom.HumineKingdom;
 import com.aymegike.huminekingdom.utils.GradeManager;
 import com.aymegike.huminekingdom.utils.objets.Kingdom;
 
+import net.md_5.bungee.api.ChatColor;
+
 public class PlayerJoin implements Listener {
 	
 	@SuppressWarnings("deprecation")
@@ -58,9 +60,10 @@ public class PlayerJoin implements Listener {
 		 ********************************************/
 		Kingdom k = HumineKingdom.getPlayerkingdom(p);
 		if(k != null){
-			//k.increaseGlory(p, 2, true);
-			if (k.haveDragonEgg() && k.getKing().getName().equals(p.getName())){
-				//k.increaseGlory(p, 30, true);				
+			if(HumineKingdom.getPlayerGrade(p).getName().equalsIgnoreCase("King") && k.haveDragonEgg()){
+				if(HumineKingdom.isNewDay()){
+					p.sendMessage(ChatColor.DARK_PURPLE+"Ho grand empereur tout puissant, allez caressez votre oeuf pour montrer a tous votre puissance !");
+				}
 			}
 		}
 		

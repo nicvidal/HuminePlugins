@@ -84,7 +84,7 @@ public class ForceSpawn implements CommandExecutor {
 								Bukkit.getPlayer(name).teleport(new Location(Bukkit.getServer().getWorlds().get(0), x, y, z));
 								Bukkit.getPlayer(name).getInventory().clear();
 								Bukkit.getPlayer(name).setGameMode(GameMode.SURVIVAL);
-								Bukkit.getPlayer(name).kickPlayer("Merci");
+								Bukkit.getPlayer(name).kickPlayer("Votre point de spawn vient d'être forcé, veuillez vous reconnecter.");
 							}catch(IOException e){
 								e.printStackTrace();
 							}
