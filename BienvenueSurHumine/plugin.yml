@@ -1,0 +1,15 @@
+name: WelcomeOnHumineCraft
+author: Aymegike
+version: 2.1
+main: com.aymegike.bvn.Main
+commands:
+    guide:
+        description: obtenir le livre de regle.
+    downloadpack:
+        description: permet de telecharger le texturepack du serveur.
+    next:
+        description: permet de passer a la suite de la cinematique(ne pas utiliser en jeu)
+    forcespawn:
+        description: modifie le spawn de la personne cible
+    getuuid:
+        description: obtenir l uuid d un joueur

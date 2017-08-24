@@ -1,7 +1,0 @@
-name: HumineKingdom
-author: Aymegike
-version: 3.1
-main: com.aymegike.huminekingdom.HumineKingdom
-commands:
-    kingdom:
-        description: Gestion des royaumes

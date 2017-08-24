@@ -1,0 +1,15 @@
+## Welcome to HumineCraft ##
+
+URL-PACK: https://www.dropbox.com/s/z665ivprjvqxr6w/Huminecraft%20Introduction.zip?dl=1
+URL-FinalPACK: https://www.dropbox.com/s/xhnlmk9l8f8r8n0/HuminePack.zip?dl=1
+location:
+   spaceShip:
+     world: apparition
+     x: 994.5
+     y: 94
+     z: 994.5
+   spawn:
+     world: apparition
+     x: -20
+     y: 94
+     z: -18
