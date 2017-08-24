@@ -92,7 +92,7 @@ public class BreakBlock implements Listener{
 					if(HumineKingdom.getPlayerkingdom(p).haveDragonEgg()){
 						for(OfflinePlayer op : HumineKingdom.getPlayerkingdom(p).getAllMember()){
 							if(op.isOnline()){
-								op.getPlayer().sendMessage(ChatColor.WHITE+p.getName()+ChatColor.DARK_PURPLE+" vien de prendre l'oeuf");
+								op.getPlayer().sendMessage(ChatColor.WHITE+p.getName()+ChatColor.DARK_PURPLE+" vient de prendre l'oeuf");
 								op.getPlayer().playSound(op.getPlayer().getLocation(), Sound.ENTITY_ENDERDRAGON_HURT, 5, 1);
 							}
 						}
@@ -113,7 +113,7 @@ public class BreakBlock implements Listener{
 					HumineKingdom.setLocation(new Location(p.getWorld(), 0, 0, 0));
 				}else{
 					System.out.println(p.getItemInHand().getType());
-					p.sendMessage(ChatColor.DARK_PURPLE+"[OEUF] -> Les mains vide uniquement, me recupérer vous pourrez !");
+					p.sendMessage(ChatColor.DARK_PURPLE+"Vous ne pouvez pas récupérer l'oeuf avec un objet dans les mains.");
 				}
 			}
 		}

@@ -212,7 +212,7 @@ public class PlaceBlock implements Listener{
 			}else{
 				for(OfflinePlayer op : HumineKingdom.getPlayerkingdom(p).getAllMember()){
 					if(op.isOnline()){
-						op.getPlayer().sendMessage(ChatColor.WHITE+p.getName()+ChatColor.DARK_PURPLE+" vien de replacer l'oeuf");
+						op.getPlayer().sendMessage(ChatColor.WHITE+p.getName()+ChatColor.DARK_PURPLE+" vient de replacer l'oeuf");
 						op.getPlayer().playSound(op.getPlayer().getLocation(), Sound.ENTITY_ENDERDRAGON_HURT, 5, 1);
 					}
 				}

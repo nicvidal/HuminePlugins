@@ -20,10 +20,13 @@ public class DropItem implements Listener{
 	@EventHandler
 	public void onPlayerDrop(PlayerDropItemEvent e){
 		Player p = e.getPlayer();
+		
 		if(HumineKingdom.getPlayerkingdom(p) != null){
 			e.getItemDrop().setPickupDelay(100);
 			e.getItemDrop().setGlowing(true);
 			e.getItemDrop().setInvulnerable(true);
+			e.getItemDrop().setPortalCooldown(100);
+			
 			
 			if(!HumineKingdom.getPlayerkingdom(p).haveDragonEgg()){
 				HumineKingdom.getPlayerkingdom(p).setDragonEgg(true);
@@ -32,7 +35,7 @@ public class DropItem implements Listener{
 			}else{
 				for(OfflinePlayer op : HumineKingdom.getPlayerkingdom(p).getAllMember()){
 					if(op.isOnline()){
-						op.getPlayer().sendMessage(ChatColor.WHITE+p.getName()+ChatColor.DARK_PURPLE+" vien de replacer l'oeuf");
+						op.getPlayer().sendMessage(ChatColor.WHITE+p.getName()+ChatColor.DARK_PURPLE+" vient de replacer l'oeuf");
 						op.getPlayer().playSound(op.getPlayer().getLocation(), Sound.ENTITY_ENDERDRAGON_HURT, 5, 1);
 					}
 				}
