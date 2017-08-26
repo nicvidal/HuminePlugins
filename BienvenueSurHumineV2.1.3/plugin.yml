@@ -1,6 +1,6 @@
 name: WelcomeOnHumineCraft
 author: Aymegike
-version: 2.1
+version: 2.1.3
 main: com.aymegike.bvn.Main
 commands:
     guide:
