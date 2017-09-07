@@ -1,6 +1,6 @@
 name: HumineKingdom
 author: Aymegike
-version: 3.5.3
+version: 3.5.4
 main: com.aymegike.huminekingdom.HumineKingdom
 commands:
     kingdom:

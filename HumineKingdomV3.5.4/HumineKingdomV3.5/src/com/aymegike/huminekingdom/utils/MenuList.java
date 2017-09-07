@@ -217,7 +217,7 @@ public class MenuList {
 	
 	//MENU INVITE
 	public static Menu InvitationMenu(Kingdom k, Player p){
-Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, null);
+		Menu menu = new Menu(ChatColor.GOLD+"Vous avez reçu une invitation !", 3*9, null);
 		
 		ArrayList<String> lore = new ArrayList<String>();
 		

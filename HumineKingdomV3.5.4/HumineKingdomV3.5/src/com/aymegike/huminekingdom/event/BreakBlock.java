@@ -70,7 +70,7 @@ public class BreakBlock implements Listener{
 						HumineKingdom.updateDate();
 						p.sendMessage(ChatColor.DARK_PURPLE+"Vous venez de comfirmer votre gloire !");
 						for(Player pls : Bukkit.getOnlinePlayers()){
-							pls.sendMessage(ChatColor.DARK_PURPLE+"Gloire a l'empire "+ChatColor.WHITE+HumineKingdom.getPlayerkingdom(p).getName()+ChatColor.DARK_PURPLE+" qui renouvelle sa puissance une foi encore !");
+							pls.sendMessage(ChatColor.DARK_PURPLE+"Gloire a l'empire "+ChatColor.WHITE+HumineKingdom.getPlayerkingdom(p).getName()+ChatColor.DARK_PURPLE+" qui renouvelle sa puissance une fois encore !");
 							pls.playSound(pls.getLocation(), Sound.ENTITY_ENDERDRAGON_GROWL, 5, 1);
 						}
 						return;
