@@ -1,0 +1,7 @@
+main: com.aymegike.huminepay.HuminePay
+version: 1.0
+name: HuminePay
+author: Aymegike
+commands:
+    humineclub:
+        description: ouvre le menu des cosmetiques
