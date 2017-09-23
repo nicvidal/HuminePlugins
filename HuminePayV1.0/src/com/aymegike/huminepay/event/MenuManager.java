@@ -109,12 +109,7 @@ public class MenuManager implements Listener {
 					p.closeInventory();
 					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
 				}
-				if(e.getCurrentItem().getType() == Material.ENDER_PEARL){
-					EnderParticle ep = new EnderParticle(p);
-					ParticleManager.addParticle(ep);
-					p.closeInventory();
-					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
-				}
+				
 				
 				//PAY//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				
@@ -128,6 +123,13 @@ public class MenuManager implements Listener {
 				if(e.getCurrentItem().getType() == Material.POTION){
 					WhitchMagic wm = new WhitchMagic(p);
 					ParticleManager.addParticle(wm);
+					p.closeInventory();
+					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
+				}
+				
+				if(e.getCurrentItem().getType() == Material.ENDER_PEARL){
+					EnderParticle ep = new EnderParticle(p);
+					ParticleManager.addParticle(ep);
 					p.closeInventory();
 					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
 				}
