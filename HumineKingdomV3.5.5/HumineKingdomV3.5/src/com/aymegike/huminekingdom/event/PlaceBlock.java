@@ -255,7 +255,7 @@ public class PlaceBlock implements Listener{
 			y--;
 			Location loc = new Location(Bukkit.getWorlds().get(0), b.getLocation().getBlockX(), y, b.getLocation().getBlockZ());
 			if(loc.getBlock().getType() != Material.AIR){
-				if(loc.getBlock().getType() == Material.BEACON){
+				if(loc.getBlock().getType() == Material.BEACON && b.getType() != Material.BEACON){
 					for(Zone zone : ZoneManager.getAllZones()){
 						if(zone.playerIsInZone(p)){
 							if(!zone.playerCanBuild(p)){
@@ -289,7 +289,7 @@ public class PlaceBlock implements Listener{
 						}else{
 							e.setCancelled(true);
 							p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 5);
-							p.sendMessage(ChatColor.YELLOW+"Mais... Vous voulez déjà attaquer alors que vous n'avez même pas de royaume ! Il faut a tout prix en créer un si vous voulez en profiter.");
+							p.sendMessage(ChatColor.YELLOW+"Mais... Vous voulez déjà attaquer alors que vous n'avez même pas de royaume ! Il faut à tout prix en créer un si vous voulez en profiter.");
 							return;				
 						}
 					}
