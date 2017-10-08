@@ -174,6 +174,17 @@ public class PlaceBlock implements Listener{
 		}
 		
 		if(b.getType().equals(Material.BEACON)){
+			
+			
+			for(Zone zones : ZoneManager.getAllZones()){
+				if(zones.getLocation().getBlockX() == b.getLocation().getBlockX() && zones.getLocation().getBlockZ() == b.getLocation().getBlockZ()){
+					e.setCancelled(true);
+					return;
+				}
+					
+			}
+			
+			
 			boolean canBuild = true;
 			if(HumineKingdom.getPlayerkingdom(p) != null){
 				for(Zone zone : ZoneManager.getAllZones()){
@@ -255,7 +266,7 @@ public class PlaceBlock implements Listener{
 			y--;
 			Location loc = new Location(Bukkit.getWorlds().get(0), b.getLocation().getBlockX(), y, b.getLocation().getBlockZ());
 			if(loc.getBlock().getType() != Material.AIR){
-				if(loc.getBlock().getType() == Material.BEACON && b.getType() != Material.BEACON){
+				if(loc.getBlock().getType() == Material.BEACON){
 					for(Zone zone : ZoneManager.getAllZones()){
 						if(zone.playerIsInZone(p)){
 							if(!zone.playerCanBuild(p)){
