@@ -31,6 +31,23 @@ public class Explosion implements Listener {
 		
 		Zone zone = null;
 		
+		if(e.getEntity().isGlowing()){
+			for(Block b : blockDestroyed){
+				if(b.getType() == Material.BEACON){
+					for(Zone z : ZoneManager.getAllZones()){
+						if(b.getLocation().getBlockX() == z.getLocation().getBlockX() && b.getLocation().getBlockZ() == z.getLocation().getBlockZ()){
+							z.getKingdom().decreaseGlory(null, 300, false);
+							zone = z;
+							e.setCancelled(true);
+							b.setType(Material.AIR);
+						}
+					}
+				}
+			}
+			e.getEntity().getWorld().createExplosion(e.getLocation(), 100);
+			e.getEntity().getWorld().strikeLightning(e.getLocation());
+		}
+		
 		for(Block b : blockDestroyed){
 			if(b.getType() == Material.QUARTZ_STAIRS){
 				if(new Location(b.getLocation().getWorld(), b.getLocation().getBlockX()-1, b.getLocation().getBlockY()+1, b.getLocation().getBlockZ()).getBlock().getType() == Material.DRAGON_EGG

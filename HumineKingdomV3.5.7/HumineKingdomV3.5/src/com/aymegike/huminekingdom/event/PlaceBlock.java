@@ -8,7 +8,9 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.TNTPrimed;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -172,6 +174,44 @@ public class PlaceBlock implements Listener{
 				e.setCancelled(true);
 			}
 		}
+		
+
+		if(b.getType().equals(Material.OBSIDIAN) || b.getType().equals(Material.ENCHANTMENT_TABLE)){
+			if(b.getLocation().getBlockY() == 244){
+				e.setCancelled(true);
+				return;
+			}
+		}
+		
+		if(b.getType().equals(Material.TNT)){
+			for(Zone zones : ZoneManager.getAllZones()){
+				if(zones.getLocation().getBlockX() == b.getLocation().getBlockX() && zones.getLocation().getBlockZ() == b.getLocation().getBlockZ()){
+					e.setCancelled(true);
+					Entity tnt = e.getPlayer().getWorld().spawn(e.getBlock().getLocation(), TNTPrimed.class);
+					((TNTPrimed) tnt).setFuseTicks(100);
+					((TNTPrimed) tnt).setGlowing(true);
+					((TNTPrimed) tnt).setCustomName(ChatColor.RED+"!! SURCHARGE !!");
+					((TNTPrimed) tnt).setCustomNameVisible(true);
+					
+					return;
+				}
+					
+			}
+		}
+			
+		
+		if(b.getType().equals(Material.ENCHANTMENT_TABLE)){
+			
+			for(Zone zones : ZoneManager.getAllZones()){
+				if(zones.getLocation().getBlockX() == b.getLocation().getBlockX() && zones.getLocation().getBlockZ() == b.getLocation().getBlockZ()){
+					e.setCancelled(true);
+					return;
+				}
+					
+			}
+			
+		}
+		
 		
 		if(b.getType().equals(Material.BEACON)){
 			
