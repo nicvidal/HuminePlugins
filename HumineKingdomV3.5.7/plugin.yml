@@ -1,9 +1,0 @@
-name: HumineKingdom
-author: Aymegike
-version: 3.5.7
-main: com.aymegike.huminekingdom.HumineKingdom
-commands:
-    kingdom:
-        description: Gestion des royaumes
-    ranking:
-        description: Classement des royaumes
