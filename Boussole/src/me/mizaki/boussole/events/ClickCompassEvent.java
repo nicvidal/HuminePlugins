@@ -87,8 +87,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				// TODO Auto-generated method stub
-				poleInventory.closePlayerMenu();
+				CompassMain.sendMessage(player, "En cours de developpement...");
+				mainInventory.closePlayerMenu();
 			}
 		}));
 		
@@ -102,8 +102,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				// TODO Auto-generated method stub
-				poleInventory.closePlayerMenu();
+				CompassMain.sendMessage(player, "En cours de developpement...");
+				mainInventory.closePlayerMenu();
 			}
 		}));
 		
@@ -117,8 +117,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				// TODO Auto-generated method stub
-				poleInventory.closePlayerMenu();
+				CompassMain.sendMessage(player, "En cours de developpement...");
+				mainInventory.closePlayerMenu();
 			}
 		}));
 		
@@ -149,9 +149,9 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
+				mainInventory.closePlayerMenu();
 				poleInventory = new Menu(player, "Pole", 9);
 				fillPoleInventory();
-				mainInventory.closePlayerMenu();
 				poleInventory.openMenu();
 			}
 		}));
@@ -172,7 +172,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				// TODO Auto-generated method stub
+				CompassMain.sendMessage(player, "Direction le nord !");
+				player.setCompassTarget(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ() - 10000.0));
 				poleInventory.closePlayerMenu();
 				
 			}
@@ -189,7 +190,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				// TODO Auto-generated method stub
+				CompassMain.sendMessage(player, "Direction le sud !");
+				player.setCompassTarget(new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ() + 10000.0));
 				poleInventory.closePlayerMenu();
 			}
 		}));
@@ -204,7 +206,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				// TODO Auto-generated method stub
+				CompassMain.sendMessage(player, "Direction l'est !");
+				player.setCompassTarget(new Location(player.getWorld(), player.getLocation().getX() + 10000.0, player.getLocation().getY(), player.getLocation().getZ()));
 				poleInventory.closePlayerMenu();
 			}
 		}));
@@ -219,7 +222,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				// TODO Auto-generated method stub
+				CompassMain.sendMessage(player, "Direction l'ouest !");
+				player.setCompassTarget(new Location(player.getWorld(), player.getLocation().getX() - 10000.0, player.getLocation().getY(), player.getLocation().getZ()));
 				poleInventory.closePlayerMenu();
 			}
 		}));
