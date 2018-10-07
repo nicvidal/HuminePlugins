@@ -6,15 +6,19 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
+import org.bukkit.material.Directional;
+import org.bukkit.material.MaterialData;
 
 import com.aymegike.huminekingdom.utils.BlockList;
 import com.aypi.manager.FileManager;
 
+@SuppressWarnings("deprecation")
 public class Shematic {
 	
 	private String name;
-	private Kingdom kingdom;
-	private ShieldGenerator shieldGenerator;
 	
 	private File file;
 	
@@ -24,8 +28,6 @@ public class Shematic {
 	public Shematic(Kingdom kingdom, String name, ShieldGenerator sg) {
 		
 		this.name = name;
-		this.kingdom = kingdom;
-		this.shieldGenerator = sg;
 		
 		file = new File(kingdom.getShematicFile().getAbsolutePath()+"/"+name+"_"+sg.getLocation().getWorld().getName()+"_"+sg.getLocation().getBlockX()+"_"+sg.getLocation().getBlockY()+"_"+sg.getLocation().getBlockZ()+".craft");
 		
@@ -34,15 +36,11 @@ public class Shematic {
 			ArrayList<String> print = new ArrayList<String>();
 			
 			for (Location loc : sg.getZone().getSquare().getScareLoc()) {
-				if (!BlockList.getBlackList(loc.getBlock().getType())) {
+				if (!BlockList.getBlackList(loc.getBlock().getType())) {	
 					
-//					BlockData bd = (BlockData) loc.getBlock().getBlockData();
-//					if (bd instanceof Rotatable) {
-//						Rotatable rot = (Rotatable) bd;		
-//						print.add(loc.getWorld()+" "+loc.getBlockX()+" "+loc.getBlockY()+" "+loc.getBlockZ()+" "+loc.getBlock().getType().name()+" "+rot.getRotation().name());
-//					} else {
-						print.add(loc.getWorld().getName()+" "+loc.getBlockX()+" "+loc.getBlockY()+" "+loc.getBlockZ()+" "+loc.getBlock().getType().name());
-//					}					
+					setFacingDirection(BlockFace.NORTH, loc.getBlock());
+					
+					print.add(loc.getWorld().getName()+" "+loc.getBlockX()+" "+loc.getBlockY()+" "+loc.getBlockZ()+" "+loc.getBlock().getType().name());
 				}
 			}
 			
@@ -77,8 +75,12 @@ public class Shematic {
 					}
 					line = str.get(index).split(" ");
 				}
-				if (BlockList.getWhitList(new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])).getBlock().getType()))
+				if (BlockList.getWhitList(new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])).getBlock().getType())) {
+					
 					new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])).getBlock().setType(Material.matchMaterial(line[4]));
+					
+				}
+					
 				
 				index++;
 				
@@ -93,6 +95,17 @@ public class Shematic {
 	
 	public File getFile() {
 		return file;
+	}
+	
+	private void setFacingDirection(final BlockFace face, final Block block) {
+	    final BlockState state = block.getState();
+		final MaterialData materialData = state.getData();
+	    if (materialData instanceof Directional) {
+	        final Directional directional = (Directional) materialData;
+	        directional.setFacingDirection(face);
+	        state.update();
+	        System.out.println(face+" "+directional.getFacing());
+	    }
 	}
 
 }
