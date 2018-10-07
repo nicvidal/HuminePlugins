@@ -4,3 +4,6 @@ main: me.mizaki.boussole.main.CompassMain
 version: 1.0
 depend: [Aypi]
 commands:
+  compass:
+    usage: /compass
+    description: permet d'enregistrer une position par la suite retrouvable avec la boussole
