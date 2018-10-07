@@ -1,0 +1,11 @@
+name: HumineKingdom
+version: 4.0
+api-version: 1.13
+author: Aymegike
+main: com.aymegike.huminekingdom.HumineKingdom
+depend: [Aypi]
+commands:
+    kingdom:
+        description: Gestion des royaumes
+    ranking:
+        description: Classement des royaumes
