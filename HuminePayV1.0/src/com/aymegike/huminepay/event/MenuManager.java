@@ -13,7 +13,6 @@ import com.aymegike.huminepay.utils.particles.AngryParticle;
 import com.aymegike.huminepay.utils.particles.CloudParticle;
 import com.aymegike.huminepay.utils.particles.ColorParticle;
 import com.aymegike.huminepay.utils.particles.CritParticle;
-import com.aymegike.huminepay.utils.particles.EnderParticle;
 import com.aymegike.huminepay.utils.particles.FlameParticle;
 import com.aymegike.huminepay.utils.particles.GreenParticle;
 import com.aymegike.huminepay.utils.particles.LoveParticle;
@@ -128,8 +127,8 @@ public class MenuManager implements Listener {
 				}
 				
 				if(e.getCurrentItem().getType() == Material.ENDER_PEARL){
-					EnderParticle ep = new EnderParticle(p);
-					ParticleManager.addParticle(ep);
+					//EnderParticle ep = new EnderParticle(p);
+					//ParticleManager.addParticle(ep);
 					p.closeInventory();
 					p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 5, 5);
 				}

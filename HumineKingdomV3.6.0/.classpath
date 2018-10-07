@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="HumineKingdomV3.5/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="E:/java/API/spigot-1.12.jar"/>
+	<classpathentry kind="lib" path="D:/programmation/java/API/spigot-1.12.2.jar"/>
 	<classpathentry kind="output" path="HumineKingdomV3.5/bin"/>
 </classpath>

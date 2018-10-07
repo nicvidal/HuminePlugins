@@ -151,6 +151,7 @@ public class MenuList {
 	}
 	
 	//MAIN KINGDOM 
+	@SuppressWarnings("deprecation")
 	public static Menu MainKingdomMenu(Kingdom k, Player p){
 		Menu menu = new Menu(ChatColor.DARK_PURPLE+"Votre Royaume ! "+ChatColor.WHITE+k.getName(), 6*9, null);
 		
@@ -275,6 +276,7 @@ public class MenuList {
 	}
 	
 	//PLAYER MENU
+	@SuppressWarnings("deprecation")
 	public static Menu PlayerMenu(Kingdom k, OfflinePlayer p){
 		Menu menu = new Menu(ChatColor.DARK_PURPLE+"Joueur", 3*9, k);
 		
@@ -602,6 +604,7 @@ public class MenuList {
 		
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static Menu choseGrade(Kingdom k, OfflinePlayer p){
 		
 		File file = new File(k.getKingdomFile()+"/grade");
