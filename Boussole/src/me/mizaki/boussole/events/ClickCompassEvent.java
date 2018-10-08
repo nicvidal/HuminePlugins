@@ -22,7 +22,6 @@ public class ClickCompassEvent implements Listener
 
 	private Menu mainInventory;
 	private Menu poleInventory;
-	private Player player;
 	
 	/*
 	 * Cette Fonction gere l'ouverture de l'inventaire par l'intermediaire d'une boussole
@@ -32,7 +31,6 @@ public class ClickCompassEvent implements Listener
 	public void onMakeInventoryClick(PlayerInteractEvent event) 
 	{
 		final Player player = event.getPlayer();
-		this.player = player;
 		
 		if(player.getInventory().getItemInMainHand() != null || player.getInventory().getItemInOffHand() != null)
 		{
@@ -41,7 +39,7 @@ public class ClickCompassEvent implements Listener
 				if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
 				{
 					this.mainInventory = new Menu(player, "Boussole de " + player.getName(), 9);
-					fillMainInventory();
+					fillMainInventory(player);
 					this.mainInventory.openMenu();
 				}
 			}
@@ -49,7 +47,7 @@ public class ClickCompassEvent implements Listener
 		
 	}
 	
-	private void fillMainInventory()
+	private void fillMainInventory(Player player)
 	{
 		ItemMeta meta;
 		
@@ -164,14 +162,14 @@ public class ClickCompassEvent implements Listener
 			{
 				mainInventory.closePlayerMenu();
 				poleInventory = new Menu(player, "Pole", 9);
-				fillPoleInventory();
+				fillPoleInventory(player);
 				poleInventory.openMenu();
 			}
 		}));
 		
 	}
 	
-	private void fillPoleInventory() {
+	private void fillPoleInventory(Player player) {
 		
 		ItemMeta meta;
 		
