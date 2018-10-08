@@ -87,7 +87,13 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				CompassMain.sendMessage(player, "En cours de developpement...");
+				if(CompassMain.getInstance().getPositions().containsKey(player.getName())) {
+					player.setCompassTarget(CompassMain.getInstance().getPositions().get(player.getName()));
+					CompassMain.sendMessage(player, "Direction la position enregistree !");
+				}
+				else
+					CompassMain.sendMessage(player, "Aucune position enregistree !");
+				
 				mainInventory.closePlayerMenu();
 			}
 		}));
@@ -102,7 +108,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				CompassMain.sendMessage(player, "En cours de developpement...");
+				CompassMain.sendMessage(player, "Veuillez entrer le nom du joueur ci-dessous");
+				CompassMain.getInstance().getSearchDemands().add(player.getName());
 				mainInventory.closePlayerMenu();
 			}
 		}));
@@ -117,7 +124,13 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				CompassMain.sendMessage(player, "En cours de developpement...");
+				if(CompassMain.getInstance().getDefaultSpawn() != null) {
+					player.setCompassTarget(CompassMain.getInstance().getDefaultSpawn());
+					CompassMain.sendMessage(player, "Direction le spawn de depart !");
+				}
+				else
+					CompassMain.sendMessage(player, "Aucun spawn de depart defini");
+				
 				mainInventory.closePlayerMenu();
 			}
 		}));
