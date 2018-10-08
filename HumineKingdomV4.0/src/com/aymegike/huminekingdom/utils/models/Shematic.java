@@ -1,5 +1,6 @@
 package com.aymegike.huminekingdom.utils.models;
 
+import java.awt.Shape;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -8,14 +9,14 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Rotatable;
 import org.bukkit.material.Directional;
-import org.bukkit.material.MaterialData;
+import org.bukkit.material.Stairs;
 
 import com.aymegike.huminekingdom.utils.BlockList;
 import com.aypi.manager.FileManager;
 
-@SuppressWarnings("deprecation")
 public class Shematic {
 	
 	private String name;
@@ -98,13 +99,23 @@ public class Shematic {
 	}
 	
 	private void setFacingDirection(final BlockFace face, final Block block) {
-	    final BlockState state = block.getState();
-		final MaterialData materialData = state.getData();
-	    if (materialData instanceof Directional) {
-	        final Directional directional = (Directional) materialData;
-	        directional.setFacingDirection(face);
-	        state.update();
-	        System.out.println(face+" "+directional.getFacing());
+	    
+	    BlockData bd = block.getBlockData();
+
+	    if(bd instanceof Rotatable){
+	    	Rotatable rot = (Rotatable) bd;
+	       	rot.setRotation(face);
+	       	block.setBlockData(rot);
+	    }
+	    
+	    if (block.getState().getData() instanceof Stairs) {
+	    	Stairs stairs = (Stairs) block.getState().getData();
+	    	stairs.setFacingDirection(face);	
+	    	block.get
+	    }
+	    
+	    if (block.getState().getData() instanceof Directional) {
+	    	//System.out.println(((Directional) block.getState().getData()).getFacing());
 	    }
 	}
 

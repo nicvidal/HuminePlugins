@@ -63,7 +63,7 @@ public class Menu {
 			public void run() {
 				player.openInventory(inv);				
 			}
-		}, 5, 5);
+		}, 40, 40);
 	
 	}
 	
