@@ -108,7 +108,8 @@ public class ClickCompassEvent implements Listener
 			@Override
 			public void onItemClick()
 			{
-				CompassMain.sendMessage(player, "En cours de developpement...");
+				CompassMain.sendMessage(player, "Veuillez entrer le nom du joueur ci-dessous");
+				CompassMain.getInstance().getSearchDemands().add(player.getName());
 				mainInventory.closePlayerMenu();
 			}
 		}));
