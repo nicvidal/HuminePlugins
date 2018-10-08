@@ -23,12 +23,21 @@ import com.aypi.utils.inter.ZoneListener;
 
 public class HumineKingdom extends JavaPlugin {
 	
+	/*
+	 * Le plugin a besoin des imports:
+	 *  
+	 * Spigot 1.13.1 
+	 * AYPI.V1.3
+	 *  
+	 */
+	
+	
 	private static FileManager fileManager;
 	private static KingdomManager kManager;
 	
 	public void onEnable() {
 		System.out.println("-------------------------------------------");
-		System.out.println("[HumineKingdom] Aymegike & coo production !");
+		System.out.println("[HumineKingdom] EWOK PRODUCTION !");
 		System.out.println("-------------------------------------------");
 		new com.aymegike.huminekingdom.listener.EventManager(this);
 		new FileManager();

@@ -24,6 +24,10 @@ public class Menu {
 	public Menu(Player player, String title, int size) {
 		Aypi.getMenuManager().addMenu(this);
 		
+		while (size % 9 != 0) {
+			size++;
+		}
+		
 		this.title = title;
 		this.size = size;
 		this.player = player;
@@ -59,7 +63,7 @@ public class Menu {
 			public void run() {
 				player.openInventory(inv);				
 			}
-		}, 5, 5);
+		}, 40, 40);
 	
 	}
 	
