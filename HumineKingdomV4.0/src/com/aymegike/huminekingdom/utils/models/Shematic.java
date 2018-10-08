@@ -1,6 +1,4 @@
 package com.aymegike.huminekingdom.utils.models;
-
-import java.awt.Shape;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -9,10 +7,10 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.Rotatable;
-import org.bukkit.material.Directional;
-import org.bukkit.material.Stairs;
+import org.bukkit.block.data.Bisected.Half;
+import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.type.Stairs;
+import org.bukkit.block.data.type.Stairs.Shape;
 
 import com.aymegike.huminekingdom.utils.BlockList;
 import com.aypi.manager.FileManager;
@@ -37,11 +35,9 @@ public class Shematic {
 			ArrayList<String> print = new ArrayList<String>();
 			
 			for (Location loc : sg.getZone().getSquare().getScareLoc()) {
-				if (!BlockList.getBlackList(loc.getBlock().getType())) {	
+				if (!BlockList.getBlackList(loc.getBlock().getType())) {
 					
-					setFacingDirection(BlockFace.NORTH, loc.getBlock());
-					
-					print.add(loc.getWorld().getName()+" "+loc.getBlockX()+" "+loc.getBlockY()+" "+loc.getBlockZ()+" "+loc.getBlock().getType().name());
+					print.add(getLineToPrint(loc));
 				}
 			}
 			
@@ -80,6 +76,32 @@ public class Shematic {
 					
 					new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])).getBlock().setType(Material.matchMaterial(line[4]));
 					
+					
+					//SET ++
+					Block block = new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])).getBlock();
+					if (block.getBlockData() instanceof Stairs) { //STAIRS
+						
+						Stairs s = (Stairs) block.getBlockData();
+						
+						s.setFacing(BlockFace.valueOf(line[5]));
+						s.setHalf(Half.valueOf(line[6]));
+						s.setShape(Shape.valueOf(line[7]));
+						
+						block.setBlockData(s);
+						
+					} else if (block.getBlockData() instanceof Directional ) {
+						
+						Directional dir = (Directional) block.getBlockData();
+						
+						dir.setFacing(BlockFace.valueOf(line[5]));
+						
+						block.setBlockData(dir);
+						
+					}
+					
+					
+					
+					
 				}
 					
 				
@@ -98,25 +120,25 @@ public class Shematic {
 		return file;
 	}
 	
-	private void setFacingDirection(final BlockFace face, final Block block) {
-	    
-	    BlockData bd = block.getBlockData();
-
-	    if(bd instanceof Rotatable){
-	    	Rotatable rot = (Rotatable) bd;
-	       	rot.setRotation(face);
-	       	block.setBlockData(rot);
-	    }
-	    
-	    if (block.getState().getData() instanceof Stairs) {
-	    	Stairs stairs = (Stairs) block.getState().getData();
-	    	stairs.setFacingDirection(face);	
-	    	block.get
-	    }
-	    
-	    if (block.getState().getData() instanceof Directional) {
-	    	//System.out.println(((Directional) block.getState().getData()).getFacing());
-	    }
+	private String getLineToPrint(Location loc) {
+		String lineToPrint = loc.getWorld().getName()+" "+loc.getBlockX()+" "+loc.getBlockY()+" "+loc.getBlockZ()+" "+loc.getBlock().getType().name();
+		
+		if (loc.getBlock().getBlockData() instanceof Stairs) {
+			
+			Stairs s = (Stairs) loc.getBlock().getBlockData();
+			
+			lineToPrint +=" "+s.getFacing().toString()+" "+s.getHalf().toString()+" "+s.getShape().toString();
+		}
+		
+		else if (loc.getBlock().getBlockData() instanceof Directional ) {
+			
+			Directional dir = (Directional) loc.getBlock().getBlockData();
+			
+			lineToPrint = dir.getFacing().toString();
+			
+		}
+		
+		return lineToPrint;
 	}
 
 }
