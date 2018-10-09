@@ -51,12 +51,12 @@ public class ClickCompassEvent implements Listener
 	{
 		ItemMeta meta;
 		
-		ItemStack item = new ItemStack(Material.RED_BED);
-		meta = item.getItemMeta();
+		ItemStack lit = new ItemStack(Material.RED_BED);
+		meta = lit.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "Lit");
-		item.setItemMeta(meta);
+		lit.setItemMeta(meta);
 		
-		this.mainInventory.setButton(0, new Button(item, new MenuItemListener() {
+		this.mainInventory.setButton(0, new Button(lit, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -75,12 +75,12 @@ public class ClickCompassEvent implements Listener
 		}));
 		
 		
-		item = new ItemStack(Material.ENDER_PEARL);
-		meta = item.getItemMeta();
+		ItemStack position = new ItemStack(Material.ENDER_PEARL);
+		meta = position.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "Position enregistree");
-		item.setItemMeta(meta);
+		position.setItemMeta(meta);
 		
-		this.mainInventory.setButton(1, new Button(item, new MenuItemListener() {
+		this.mainInventory.setButton(1, new Button(position, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -96,12 +96,12 @@ public class ClickCompassEvent implements Listener
 			}
 		}));
 		
-		item = new ItemStack(Material.SKELETON_SKULL);
-		meta = item.getItemMeta();
+		ItemStack suivre = new ItemStack(Material.SKELETON_SKULL);
+		meta = suivre.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "Suivre un joueur");
-		item.setItemMeta(meta);
+		suivre.setItemMeta(meta);
 		
-		this.mainInventory.setButton(2, new Button(item, new MenuItemListener() {
+		this.mainInventory.setButton(2, new Button(suivre, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -112,12 +112,12 @@ public class ClickCompassEvent implements Listener
 			}
 		}));
 		
-		item = new ItemStack(Material.BLUE_BED);
-		meta = item.getItemMeta();
+		ItemStack spawn = new ItemStack(Material.BLUE_BED);
+		meta = spawn.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "Spawn par defaut");
-		item.setItemMeta(meta);
+		spawn.setItemMeta(meta);
 		
-		this.mainInventory.setButton(3, new Button(item, new MenuItemListener() {
+		this.mainInventory.setButton(3, new Button(spawn, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -133,12 +133,12 @@ public class ClickCompassEvent implements Listener
 			}
 		}));
 		
-		item = new ItemStack(Material.APPLE);
-		meta = item.getItemMeta();
+		ItemStack origine= new ItemStack(Material.APPLE);
+		meta = origine.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "Pointez le 0 !");
-		item.setItemMeta(meta);
+		origine.setItemMeta(meta);
 		
-		this.mainInventory.setButton(4, new Button(item, new MenuItemListener() {
+		this.mainInventory.setButton(4, new Button(origine, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -150,12 +150,12 @@ public class ClickCompassEvent implements Listener
 		}));
 		
 		
-		item = new ItemStack(Material.ENDER_PEARL);
-		meta = item.getItemMeta();
+		ItemStack pole = new ItemStack(Material.ENDER_PEARL);
+		meta = pole.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "Pointez vers un pole");
-		item.setItemMeta(meta);
+		pole.setItemMeta(meta);
 		
-		this.mainInventory.setButton(5, new Button(item, new MenuItemListener() {
+		this.mainInventory.setButton(5, new Button(pole, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -173,12 +173,12 @@ public class ClickCompassEvent implements Listener
 		
 		ItemMeta meta;
 		
-		ItemStack item = new ItemStack(Material.GRASS_BLOCK);
-		meta = item.getItemMeta();
+		ItemStack nord = new ItemStack(Material.GRASS_BLOCK);
+		meta = nord.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "NORD");
-		item.setItemMeta(meta);
+		nord.setItemMeta(meta);
 		
-		this.poleInventory.setButton(0, new Button(item, new MenuItemListener() {
+		this.poleInventory.setButton(0, new Button(nord, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -191,12 +191,12 @@ public class ClickCompassEvent implements Listener
 		}));
 		
 		
-		item = new ItemStack(Material.GRASS_BLOCK);
-		meta = item.getItemMeta();
+		ItemStack sud = new ItemStack(Material.GRASS_BLOCK);
+		meta = sud.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "SUD");
-		item.setItemMeta(meta);
+		sud.setItemMeta(meta);
 		
-		this.poleInventory.setButton(1, new Button(item, new MenuItemListener() {
+		this.poleInventory.setButton(1, new Button(sud, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -207,12 +207,12 @@ public class ClickCompassEvent implements Listener
 			}
 		}));
 		
-		item = new ItemStack(Material.GRASS_BLOCK);
-		meta = item.getItemMeta();
+		ItemStack est = new ItemStack(Material.GRASS_BLOCK);
+		meta = est.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "EST");
-		item.setItemMeta(meta);
+		est.setItemMeta(meta);
 		
-		this.poleInventory.setButton(2, new Button(item, new MenuItemListener() {
+		this.poleInventory.setButton(2, new Button(est, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()
@@ -223,12 +223,12 @@ public class ClickCompassEvent implements Listener
 			}
 		}));
 		
-		item = new ItemStack(Material.GRASS_BLOCK);
-		meta = item.getItemMeta();
+		ItemStack ouest = new ItemStack(Material.GRASS_BLOCK);
+		meta = ouest.getItemMeta();
 		meta.setDisplayName(ChatColor.AQUA + "OUEST");
-		item.setItemMeta(meta);
+		ouest.setItemMeta(meta);
 		
-		this.poleInventory.setButton(3, new Button(item, new MenuItemListener() {
+		this.poleInventory.setButton(3, new Button(ouest, new MenuItemListener() {
 			
 			@Override
 			public void onItemClick()

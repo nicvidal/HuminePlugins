@@ -2,6 +2,7 @@ name: Boussole
 author: MizakiGaming
 main: me.mizaki.boussole.main.CompassMain
 version: 1.3b
+api-version: 1.13
 depend: [Aypi]
 commands:
   compass:
