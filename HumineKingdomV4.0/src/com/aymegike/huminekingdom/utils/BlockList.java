@@ -4,7 +4,19 @@ import org.bukkit.Material;
 
 public class BlockList {
 	
-	public static Material[] blackList = {Material.AIR, Material.VOID_AIR, Material.BEDROCK, Material.WATER, Material.CHEST, Material.FURNACE, Material.LAVA, Material.CAVE_AIR};
+	public static Material[] blackList = 
+		{Material.AIR, 
+		Material.VOID_AIR, 
+		Material.BEDROCK, 
+		Material.WATER, 
+		Material.CHEST, 
+		Material.FURNACE, 	
+		Material.LAVA, 
+		Material.CAVE_AIR, 
+		
+		Material.PISTON_HEAD,
+		Material.MOVING_PISTON,
+		};
 	
 	public static Material[] whiteList = {Material.AIR, Material.VOID_AIR, Material.WATER, Material.LAVA, Material.FIRE, Material.CAVE_AIR};
 	

@@ -32,7 +32,7 @@ public class MenuList {
 	public static Menu noKingdomMenu(Player player) {
 		closePlayerMenu(player);
 
-		Menu menu = new Menu(player, ChatColor.DARK_PURPLE+"Tu n'as encore de royaume !", 3*9);
+		Menu menu = new Menu(player, ChatColor.DARK_PURPLE+"Tu n'as encore de royaume !", 3*9, true);
 		
 		ArrayList<String> lore = new ArrayList<String>();
 		
@@ -112,7 +112,7 @@ public class MenuList {
 	public static Menu mainKingdomMenu(Player player) {
 		closePlayerMenu(player);
 
-		Menu menu = new Menu(player, ChatColor.DARK_PURPLE+"-Votre royaume-", 6*9);
+		Menu menu = new Menu(player, ChatColor.DARK_PURPLE+"-Votre royaume-", 6*9, false);
 		
 		ItemStack quit = new ItemStack(Material.BARRIER);
 		ItemMeta quitm = quit.getItemMeta();
@@ -233,7 +233,7 @@ public class MenuList {
 			}
 		}
 		
-		Menu menu = new Menu(player, ChatColor.DARK_GREEN+"- Membres -", (multi+1)*9);
+		Menu menu = new Menu(player, ChatColor.DARK_GREEN+"- Membres -", (multi+1)*9, false);
 		
 		ArrayList<String> lore = new ArrayList<String>();
 		
@@ -345,7 +345,7 @@ public class MenuList {
 	//MENU D'INVITATION 
 	public static Menu invitationMenu(Player sender, Player receiver) {
 		closePlayerMenu(receiver);
-		Menu menu = new Menu(receiver, ChatColor.BOLD+sender.getName()+ChatColor.DARK_PURPLE+ "t'invite dans "+ChatColor.WHITE+HumineKingdom.getPlayerKingdom(sender).getName()+ChatColor.DARK_GREEN+" !", 3*9);
+		Menu menu = new Menu(receiver, ChatColor.BOLD+sender.getName()+ChatColor.DARK_PURPLE+ "t'invite dans "+ChatColor.WHITE+HumineKingdom.getPlayerKingdom(sender).getName()+ChatColor.DARK_GREEN+" !", 3*9, true);
 		
 		ArrayList<String> lore = new ArrayList<String>();
 		
@@ -441,7 +441,7 @@ public class MenuList {
 	//PLAYER MENU
 	public static Menu playerProfilMenu(Player player, OfflinePlayer target) {
 		closePlayerMenu(player);
-		Menu menu = new Menu(player, ChatColor.DARK_GREEN+"- "+ChatColor.WHITE+target.getName()+ChatColor.DARK_GREEN+" -", 3*9);
+		Menu menu = new Menu(player, ChatColor.DARK_GREEN+"- "+ChatColor.WHITE+target.getName()+ChatColor.DARK_GREEN+" -", 3*9, false);
 		
 		ItemStack glass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
 		ItemMeta glassM = glass.getItemMeta();
@@ -604,7 +604,7 @@ public class MenuList {
 			}
 		}
 		
-		Menu menu = new Menu(player, ChatColor.BLUE+"- "+ChatColor.WHITE+"Grades a ajouter"+ChatColor.BLUE+" -", (multi+1)*9);
+		Menu menu = new Menu(player, ChatColor.BLUE+"- "+ChatColor.WHITE+"Grades a ajouter"+ChatColor.BLUE+" -", (multi+1)*9, false);
 		
 		ItemStack membre = new ItemStack(Material.LEGACY_SKULL_ITEM, 1, (byte) SkullType.PLAYER.ordinal());
 		SkullMeta membrem = (SkullMeta) membre.getItemMeta();
@@ -700,7 +700,7 @@ public class MenuList {
 			}
 		}
 		
-		Menu menu = new Menu(player, ChatColor.BLUE+ "- "+ChatColor.WHITE+"grades "+ChatColor.BLUE+"-", (multi+1)*9);
+		Menu menu = new Menu(player, ChatColor.BLUE+ "- "+ChatColor.WHITE+"grades "+ChatColor.BLUE+"-", (multi+1)*9, false);
 		int slot = 0;
 		for (Grade grade : HumineKingdom.getPlayerKingdom(player).getGrades()) {
 			if (!grade.getName().equalsIgnoreCase(HumineKingdom.getPlayerKingdom(player).getKingGradeName())) {
@@ -801,7 +801,7 @@ public class MenuList {
 	//GRADE MENU
 	public static Menu gradeMenu(Player player, Grade grade) {
 		closePlayerMenu(player);
-		Menu menu = new Menu(player, ChatColor.BLUE+" - "+ChatColor.WHITE+grade.getName()+ChatColor.BLUE+" -", 3*9);
+		Menu menu = new Menu(player, ChatColor.BLUE+" - "+ChatColor.WHITE+grade.getName()+ChatColor.BLUE+" -", 3*9, false);
 		
 		ItemStack glass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
 		ItemMeta glassM = glass.getItemMeta();
@@ -940,7 +940,7 @@ public class MenuList {
 			}
 		}
 		
-		Menu menu = new Menu(player, ChatColor.GREEN+"- "+ChatColor.WHITE+"Liste des permissions"+ChatColor.GREEN+" -", (multi+1)*9);		
+		Menu menu = new Menu(player, ChatColor.GREEN+"- "+ChatColor.WHITE+"Liste des permissions"+ChatColor.GREEN+" -", (multi+1)*9, false);		
 		
 		ItemStack igrade = new ItemStack(Material.NAME_TAG);
 		ItemMeta igradem = igrade.getItemMeta();
@@ -1044,7 +1044,7 @@ public class MenuList {
 		
 		closePlayerMenu(player);
 		
-		Menu menu = new Menu(player, ChatColor.BLUE+ "- "+ChatColor.WHITE+"mes generateurs "+ChatColor.BLUE+"-", 3*9);
+		Menu menu = new Menu(player, ChatColor.BLUE+ "- "+ChatColor.WHITE+"mes generateurs "+ChatColor.BLUE+"-", 3*9, false);
 		
 		ItemStack glass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
 		ItemMeta glassM = glass.getItemMeta();
@@ -1130,7 +1130,7 @@ public class MenuList {
 			}
 		}
 		
-		Menu menu = new Menu(player, ChatColor.DARK_GREEN+"- Mes plans -", (multi+1)*9);
+		Menu menu = new Menu(player, ChatColor.DARK_GREEN+"- Mes plans -", (multi+1)*9, false);
 		
 		ArrayList<String> lore = new ArrayList<String>();
 		

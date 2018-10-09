@@ -9,8 +9,14 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected.Half;
 import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.Orientable;
 import org.bukkit.block.data.type.Door;
 import org.bukkit.block.data.type.Stairs;
+import org.bukkit.block.data.type.Comparator;
+import org.bukkit.block.data.type.Comparator.Mode;
+import org.bukkit.block.data.type.Repeater;
+import org.bukkit.block.data.type.Slab;
+import org.bukkit.block.data.type.Slab.Type;
 import org.bukkit.block.data.type.Stairs.Shape;
 
 import com.aymegike.huminekingdom.utils.BlockList;
@@ -91,6 +97,14 @@ public class Shematic {
 						
 					}
 					
+					if (block.getBlockData() instanceof Slab) {
+						Slab s = (Slab) block.getBlockData();
+						
+						s.setType(Type.valueOf(line[5]));
+						
+						block.setBlockData(s);
+					}
+					
 					if (block.getBlockData() instanceof Stairs) { //STAIRS
 						
 						Stairs s = (Stairs) block.getBlockData();
@@ -101,6 +115,54 @@ public class Shematic {
 						block.setBlockData(s);
 						
 					} 
+					
+					if (block.getBlockData() instanceof Repeater) {
+						
+						Repeater rp = (Repeater) block.getBlockData();
+						
+						rp.setDelay(Integer.parseInt(line[6]));
+						
+						block.setBlockData(rp);
+						
+					}
+					
+					if (block.getBlockData() instanceof Comparator) {
+						
+						Comparator c = (Comparator) block.getBlockData();
+						
+						c.setMode(Mode.valueOf(line[6]));
+						
+						block.setBlockData(c);
+					}
+					
+					
+//					if (block.getBlockData() instanceof Door) { //DOORS
+//										
+//						
+//						if (Half.valueOf(line[7]) == Half.BOTTOM) {
+//							
+//							Block b = new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2])+1, Integer.parseInt(line[3])).getBlock();
+//							//b.setType(Material.matchMaterial(line[4]));
+//							
+//							Door d = (Door) block.getBlockData();
+//							d.setHinge(Hinge.valueOf(line[6]));
+//							d.setHalf(Half.BOTTOM);
+//							
+//							block.setBlockData(d);
+//							
+//							d = (Door) b.getBlockData();
+//							d.setHinge(Hinge.valueOf(line[6]));
+//							d.setHalf(Half.TOP);
+//							
+//							block.setBlockData(d);
+//							
+//							
+//							
+//						} else {
+//							block.setType(Material.AIR);
+//						}
+//						
+//					} 
 					
 				}
 					
@@ -124,7 +186,7 @@ public class Shematic {
 		
 		String lineToPrint = loc.getWorld().getName()+" "+loc.getBlockX()+" "+loc.getBlockY()+" "+loc.getBlockZ()+" "+loc.getBlock().getType().name();
 		
-		if (loc.getBlock().getBlockData() instanceof Directional ) {
+		if (loc.getBlock().getBlockData() instanceof Directional ) { //DIRECTIONALS
 			
 			Directional dir = (Directional) loc.getBlock().getBlockData();
 			
@@ -132,18 +194,41 @@ public class Shematic {
 			
 		}
 		
-		if (loc.getBlock().getBlockData() instanceof Stairs) {
+		if (loc.getBlock().getBlockData() instanceof Orientable) {
+			System.out.println(loc.getBlock().getType().toString());
+		}
+		
+		if (loc.getBlock().getBlockData() instanceof Stairs) { //STAIRS
 			
 			Stairs s = (Stairs) loc.getBlock().getBlockData();
 			
 			lineToPrint +=" "+s.getHalf().toString()+" "+s.getShape().toString();
 		}
 		
-		if (loc.getBlock().getBlockData() instanceof Door) {
+		if (loc.getBlock().getBlockData() instanceof Slab) { //SLAB
+			
+			Slab s = (Slab) loc.getBlock().getBlockData();
+			
+			lineToPrint += " "+s.getType().toString();
+			
+		}
+		
+		if (loc.getBlock().getBlockData() instanceof Door) { //DOORS
 			
 			Door d = (Door) loc.getBlock().getBlockData();
-			//d.get
+			lineToPrint +=" "+d.getHinge().toString()+" "+d.getHalf().toString();
 			
+		}
+		
+		if (loc.getBlock().getBlockData() instanceof Repeater) {
+			Repeater rp = (Repeater) loc.getBlock().getBlockData();
+			
+			lineToPrint += " "+rp.getDelay();
+		}
+		
+		if (loc.getBlock().getBlockData() instanceof Comparator) {
+			Comparator c = (Comparator) loc.getBlock().getBlockData();
+			lineToPrint += " "+c.getMode().toString();
 		}
 		
 		return lineToPrint;
