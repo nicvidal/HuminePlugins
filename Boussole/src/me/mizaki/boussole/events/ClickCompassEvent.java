@@ -38,7 +38,7 @@ public class ClickCompassEvent implements Listener
 			{
 				if(event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
 				{
-					this.mainInventory = new Menu(player, "Boussole de " + player.getName(), 9);
+					this.mainInventory = new Menu(player, "Boussole de " + player.getName(), 9, false);
 					fillMainInventory(player);
 					this.mainInventory.openMenu();
 				}
@@ -161,7 +161,7 @@ public class ClickCompassEvent implements Listener
 			public void onItemClick()
 			{
 				mainInventory.closePlayerMenu();
-				poleInventory = new Menu(player, "Pole", 9);
+				poleInventory = new Menu(player, "Pole", 9, false);
 				fillPoleInventory(player);
 				poleInventory.openMenu();
 			}

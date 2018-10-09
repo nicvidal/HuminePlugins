@@ -19,7 +19,6 @@ public class ChangeRegisterLocationCommand implements CommandExecutor
 			
 			CompassMain.getInstance().getPositions().put(player.getName(), player.getLocation());
 			CompassMain.sendMessage(player, ChatColor.GREEN + "Position enregistrée !");
-			CompassMain.sendMessage(player, ChatColor.GOLD + player.getLocation().toString());
 			return true;
 		}
 		else
