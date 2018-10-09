@@ -142,7 +142,7 @@ public class Shematic {
 		if (loc.getBlock().getBlockData() instanceof Door) {
 			
 			Door d = (Door) loc.getBlock().getBlockData();
-			d.get
+			//d.get
 			
 		}
 		

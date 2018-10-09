@@ -19,9 +19,11 @@ public class Menu {
 	
 	private ArrayList<Button> buttons;
 	
+	private boolean security;
+	
 	private int task;
 	
-	public Menu(Player player, String title, int size) {
+	public Menu(Player player, String title, int size, boolean security ) {
 		Aypi.getMenuManager().addMenu(this);
 		
 		while (size % 9 != 0) {
@@ -35,6 +37,7 @@ public class Menu {
 		this.inv = Bukkit.createInventory(null, size, title);
 		
 		buttons = new ArrayList<Button>();
+		this.security = security;
 		
 	}
 	
@@ -57,13 +60,17 @@ public class Menu {
 	
 	public void openMenu() {
 		
-		task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("Aypi"), new Runnable() {
-			
-			@Override
-			public void run() {
-				player.openInventory(inv);				
-			}
-		}, 40, 40);
+		if (this.security) {
+			task = Bukkit.getScheduler().scheduleSyncRepeatingTask(Bukkit.getPluginManager().getPlugin("Aypi"), new Runnable() {
+				
+				@Override
+				public void run() {
+					player.openInventory(inv);				
+				}
+			}, 5, 5);
+		} else {
+			player.openInventory(inv);
+		}
 	
 	}
 	
@@ -71,6 +78,14 @@ public class Menu {
 		Aypi.getMenuManager().removeMenu(this);
 		Bukkit.getScheduler().cancelTask(task);
 		player.closeInventory();
+	}
+	
+	public boolean getSecurity() {
+		return security;
+	}
+	
+	public void setSecurity(boolean value) {
+		this.security = value;
 	}
 	
 	public String getTitle() {
