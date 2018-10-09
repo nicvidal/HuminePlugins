@@ -4,6 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
+import com.aypi.utils.events.handlers.FinishTimerEvent;
+import com.aypi.utils.events.handlers.StartTimerEvent;
+import com.aypi.utils.inter.TimerFinishListener;
+
 public class Timer implements Runnable
 {
 
@@ -12,6 +16,7 @@ public class Timer implements Runnable
 	private boolean		start;
 	private Plugin		plugin;
 	private String		name;
+	private TimerFinishListener timerListener;
 
 	
 	
@@ -33,6 +38,7 @@ public class Timer implements Runnable
 		this.start = false;
 		this.plugin = plugin;
 		this.name = "";
+		this.timerListener = null;
 	}
 
 	
@@ -53,6 +59,7 @@ public class Timer implements Runnable
 		this.start = false;
 		this.plugin = plugin;
 		this.name = "";
+		this.timerListener = null;
 	}
 
 	
@@ -75,8 +82,30 @@ public class Timer implements Runnable
 		this.start = false;
 		this.plugin = plugin;
 		this.name = name;
+		this.timerListener = null;
 	}
 
+	
+	
+	
+	
+	/*
+	 * Class constructeur de Timer
+	 * 
+	 * @param plugin Plugin dans lequel le constructeur est appeller
+	 * 
+	 * @param duration Temps du compte à rebours en SECONDE
+	 * 
+	 * @param listener Action que doit faire le timer une fois terminer
+	 */
+	public Timer(Plugin plugin, int duration, TimerFinishListener listener)
+	{
+		this.duration = duration;
+		this.start = false;
+		this.plugin = plugin;
+		this.name = "";
+		this.timerListener = listener;
+	}
 	
 	
 	
@@ -188,6 +217,30 @@ public class Timer implements Runnable
 	public String getName()
 	{
 		return name;
+	}
+
+
+
+
+
+
+	public TimerFinishListener getFinishAction() {
+		return timerListener;
+	}
+
+
+
+
+
+
+	public void setFinishAction(TimerFinishListener timerListener) {
+		this.timerListener = timerListener;
+	}
+	
+	
+	
+	public void execute() {
+		this.timerListener.execute();
 	}
 
 }

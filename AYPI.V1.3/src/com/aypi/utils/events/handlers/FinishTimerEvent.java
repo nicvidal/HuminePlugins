@@ -1,16 +1,16 @@
-package com.aypi.events;
+package com.aypi.utils.events.handlers;
 
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
 import com.aypi.utils.Timer;
 
-public class StartTimerEvent extends Event {
+public class FinishTimerEvent extends Event {
 
 	private Timer timer;
 	
 
-	public StartTimerEvent(Timer timer) {
+	public FinishTimerEvent(Timer timer) {
 		this.timer = timer;
 	}
 

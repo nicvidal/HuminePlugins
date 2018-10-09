@@ -12,6 +12,7 @@ public class EventManager {
 		pm.registerEvents(new MenuListener(), pl);
 		pm.registerEvents(new PlayerBreakBlock(), pl);
 		pm.registerEvents(new PlayerPlaceBlock(), pl);
+		pm.registerEvents(new TimerFinishEvent(), pl);
 		if (pl.getConfig().getBoolean("playermove"))
 			pm.registerEvents(new PlayerMove(), pl);
 	}
