@@ -4,9 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 
+<<<<<<< HEAD
 import com.aypi.utils.events.handlers.FinishTimerEvent;
 import com.aypi.utils.events.handlers.StartTimerEvent;
 import com.aypi.utils.inter.TimerFinishListener;
+=======
+import com.aypi.events.FinishTimerEvent;
+import com.aypi.events.StartTimerEvent;
+>>>>>>> 9ed9e84ff87194e9d7071e2579f7fabd477efa6c
 
 public class Timer implements Runnable
 {
