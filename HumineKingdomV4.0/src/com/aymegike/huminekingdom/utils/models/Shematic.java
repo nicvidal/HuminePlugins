@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected.Half;
 import org.bukkit.block.data.Directional;
+import org.bukkit.block.data.type.Door;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.Stairs.Shape;
 
@@ -79,17 +80,8 @@ public class Shematic {
 					
 					//SET ++
 					Block block = new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])).getBlock();
-					if (block.getBlockData() instanceof Stairs) { //STAIRS
-						
-						Stairs s = (Stairs) block.getBlockData();
-						
-						s.setFacing(BlockFace.valueOf(line[5]));
-						s.setHalf(Half.valueOf(line[6]));
-						s.setShape(Shape.valueOf(line[7]));
-						
-						block.setBlockData(s);
-						
-					} else if (block.getBlockData() instanceof Directional ) {
+					
+					if (block.getBlockData() instanceof Directional ) { //CLASSIQUE
 						
 						Directional dir = (Directional) block.getBlockData();
 						
@@ -99,8 +91,16 @@ public class Shematic {
 						
 					}
 					
-					
-					
+					if (block.getBlockData() instanceof Stairs) { //STAIRS
+						
+						Stairs s = (Stairs) block.getBlockData();
+						
+						s.setHalf(Half.valueOf(line[6]));
+						s.setShape(Shape.valueOf(line[7]));
+						
+						block.setBlockData(s);
+						
+					} 
 					
 				}
 					
@@ -121,24 +121,33 @@ public class Shematic {
 	}
 	
 	private String getLineToPrint(Location loc) {
+		
 		String lineToPrint = loc.getWorld().getName()+" "+loc.getBlockX()+" "+loc.getBlockY()+" "+loc.getBlockZ()+" "+loc.getBlock().getType().name();
+		
+		if (loc.getBlock().getBlockData() instanceof Directional ) {
+			
+			Directional dir = (Directional) loc.getBlock().getBlockData();
+			
+			lineToPrint +=" "+dir.getFacing().toString();
+			
+		}
 		
 		if (loc.getBlock().getBlockData() instanceof Stairs) {
 			
 			Stairs s = (Stairs) loc.getBlock().getBlockData();
 			
-			lineToPrint +=" "+s.getFacing().toString()+" "+s.getHalf().toString()+" "+s.getShape().toString();
+			lineToPrint +=" "+s.getHalf().toString()+" "+s.getShape().toString();
 		}
 		
-		else if (loc.getBlock().getBlockData() instanceof Directional ) {
+		if (loc.getBlock().getBlockData() instanceof Door) {
 			
-			Directional dir = (Directional) loc.getBlock().getBlockData();
-			
-			lineToPrint = dir.getFacing().toString();
+			Door d = (Door) loc.getBlock().getBlockData();
+			d.get
 			
 		}
 		
 		return lineToPrint;
+		
 	}
 
 }
