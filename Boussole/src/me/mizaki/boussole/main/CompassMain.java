@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
 import me.mizaki.boussole.commands.ChangeRegisterLocationCommand;
 import me.mizaki.boussole.events.ClickCompassEvent;
 import me.mizaki.boussole.events.QuitEvent;
