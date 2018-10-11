@@ -41,6 +41,42 @@ public class FileManagerV2 {
 	
 	
 	
+	public File getFile() {
+		return file;
+	}
+
+
+
+
+
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+
+
+
+
+
+	public FileConfiguration getConfig() {
+		return config;
+	}
+
+
+
+
+
+
+	public void setConfig(FileConfiguration config) {
+		this.config = config;
+	}
+
+
+
+
+
+
 	public void save() {
 		try {
 			this.config.save(this.file);
@@ -122,6 +158,48 @@ public class FileManagerV2 {
 		else {
 			Bukkit.getServer().getConsoleSender().sendMessage("[AYPI] " + ChatColor.RED + ChatColor.BOLD + "Section " + section + " inexistante !");
 			return null;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void set(String s, Object obj) {
+		this.config.set(s, obj);
+	}
+	
+	
+	
+	
+	
+	
+	
+	public Object get(String s) {
+		Object obj;
+		if(this.config.contains(s)) {
+			obj = this.config.get(s);
+			return obj;
+		}
+		else {
+			Bukkit.getServer().getConsoleSender().sendMessage("[AYPI] " + ChatColor.RED + ChatColor.BOLD + s + " est inexistant !");
+			return null;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	public boolean contains(String s) {
+		if(this.config.contains(s)) {
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }
