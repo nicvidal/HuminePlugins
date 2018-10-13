@@ -6,15 +6,23 @@ import org.bukkit.plugin.PluginManager;
 import com.aypi.Aypi;
 
 public class EventManager {
-	
-	public EventManager(Aypi pl) {
-		PluginManager pm = Bukkit.getPluginManager();
-		pm.registerEvents(new MenuListener(), pl);
-		pm.registerEvents(new PlayerBreakBlock(), pl);
-		pm.registerEvents(new PlayerPlaceBlock(), pl);
-		pm.registerEvents(new TimerFinishEvent(), pl);
-		if (pl.getConfig().getBoolean("playermove"))
-			pm.registerEvents(new PlayerMove(), pl);
+
+	/*
+	 * Class gérant les évenements de l'AYPI
+	 * 
+	 * @param plugin Le plugin AYPI
+	 */
+
+	public EventManager(Aypi plugin) {
+		PluginManager pluginManager = Bukkit.getPluginManager();
+
+		pluginManager.registerEvents(new MenuListener(), plugin);
+		pluginManager.registerEvents(new PlayerBreakBlock(), plugin);
+		pluginManager.registerEvents(new PlayerPlaceBlock(), plugin);
+		pluginManager.registerEvents(new TimerFinishEvent(), plugin);
+
+		if (plugin.getConfig().getBoolean("playermove"))
+			pluginManager.registerEvents(new PlayerMove(), plugin);
 	}
 
 }
