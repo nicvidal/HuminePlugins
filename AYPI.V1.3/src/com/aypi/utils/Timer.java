@@ -3,6 +3,8 @@ package com.aypi.utils;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
+
+import com.aypi.Aypi;
 import com.aypi.utils.events.handlers.FinishTimerEvent;
 import com.aypi.utils.events.handlers.StartTimerEvent;
 import com.aypi.utils.inter.TimerFinishListener;
@@ -24,7 +26,7 @@ public class Timer implements Runnable
 	
 	
 	/*
-	 * Class Timer permettant de gerer un compte à rebour à multi-Thread
+	 * Class Timer permettant de gerer un compte ï¿½ rebour ï¿½ multi-Thread
 	 *
 	 *
 	 *
@@ -39,6 +41,7 @@ public class Timer implements Runnable
 		this.plugin = plugin;
 		this.name = "";
 		this.timerListener = null;
+		Aypi.getTimerManager().addTimer(this);
 	}
 
 	
@@ -51,7 +54,7 @@ public class Timer implements Runnable
 	 * 
 	 * @param plugin Plugin dans lequel le constructeur est appeller
 	 * 
-	 * @param duration Temps du compte à rebours en SECONDE
+	 * @param duration Temps du compte ï¿½ rebours en SECONDE
 	 */
 	public Timer(Plugin plugin, int duration)
 	{
@@ -60,6 +63,7 @@ public class Timer implements Runnable
 		this.plugin = plugin;
 		this.name = "";
 		this.timerListener = null;
+		Aypi.getTimerManager().addTimer(this);
 	}
 
 	
@@ -72,7 +76,7 @@ public class Timer implements Runnable
 	 * 
 	 * @param plugin Plugin dans lequel le constructeur est appeller
 	 * 
-	 * @param duration Temps du compte à rebours en SECONDE
+	 * @param duration Temps du compte ï¿½ rebours en SECONDE
 	 * 
 	 * @param name Nommez le timer
 	 */
@@ -83,6 +87,7 @@ public class Timer implements Runnable
 		this.plugin = plugin;
 		this.name = name;
 		this.timerListener = null;
+		Aypi.getTimerManager().addTimer(this);
 	}
 
 	
@@ -94,7 +99,7 @@ public class Timer implements Runnable
 	 * 
 	 * @param plugin Plugin dans lequel le constructeur est appeller
 	 * 
-	 * @param duration Temps du compte à rebours en SECONDE
+	 * @param duration Temps du compte ï¿½ rebours en SECONDE
 	 * 
 	 * @param listener Action que doit faire le timer une fois terminer
 	 */
@@ -105,8 +110,31 @@ public class Timer implements Runnable
 		this.plugin = plugin;
 		this.name = "";
 		this.timerListener = listener;
+		Aypi.getTimerManager().addTimer(this);
 	}
 	
+	
+	
+	
+	
+	/*
+	 * Class constructeur de Timer
+	 * 
+	 * @param plugin Plugin dans lequel le constructeur est appeller
+	 * 
+	 * @param duration Temps du compte ï¿½ rebours en SECONDE
+	 * 
+	 * @param listener Action que doit faire le timer une fois terminer
+	 */
+	public Timer(Plugin plugin, int duration, String name, TimerFinishListener listener)
+	{
+		this.duration = duration;
+		this.start = false;
+		this.plugin = plugin;
+		this.name = name;
+		this.timerListener = listener;
+		Aypi.getTimerManager().addTimer(this);
+	}
 	
 	
 	
@@ -173,7 +201,7 @@ public class Timer implements Runnable
 	
 	
 	/*
-	 * verifie si le Timer est lancé
+	 * verifie si le Timer est lancï¿½
 	 */
 	public boolean isStart()
 	{
@@ -186,7 +214,7 @@ public class Timer implements Runnable
 	
 	
 	/*
-	 * récupère la tache en cours
+	 * rï¿½cupï¿½re la tache en cours
 	 */
 	public BukkitTask getTask()
 	{
@@ -199,7 +227,7 @@ public class Timer implements Runnable
 	
 	
 	/*
-	 * récupère le Plugin
+	 * rï¿½cupï¿½re le Plugin
 	 */
 	public Plugin getPlugin()
 	{
@@ -212,7 +240,7 @@ public class Timer implements Runnable
 	
 	
 	/*
-	 * récupère le nom du Timer
+	 * rï¿½cupï¿½re le nom du Timer
 	 */
 	public String getName()
 	{

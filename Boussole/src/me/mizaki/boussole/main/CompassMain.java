@@ -32,7 +32,6 @@ public class CompassMain extends JavaPlugin
 	private List<String> searchDemands;
 	private HashMap<String, String> targetDemands;
 	
-	
 	@Override
 	public void onEnable()
 	{
@@ -52,7 +51,7 @@ public class CompassMain extends JavaPlugin
 		this.saveDefaultConfig();
 		this.getDataFolder().setWritable(true);
 		
-		if(this.getDataFolder().exists()) {
+		if(this.getFile().exists()) {
 			if(this.getConfig().contains("RegisterLocation")) {
 				for(String key : this.getConfig().getConfigurationSection("RegisterLocation").getKeys(false)) {
 					this.Positions.put(key, (Location) this.getConfig().get("RegisterLocation." + key));
