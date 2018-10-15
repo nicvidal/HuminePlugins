@@ -1,16 +1,21 @@
 package com.aymegike.huminekingdom.utils.models;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected.Half;
 import org.bukkit.block.data.Directional;
 import org.bukkit.block.data.Orientable;
+import org.bukkit.block.data.Rail;
 import org.bukkit.block.data.type.Door;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.block.data.type.Stairs;
 import org.bukkit.block.data.type.Comparator;
 import org.bukkit.block.data.type.Comparator.Mode;
@@ -18,9 +23,12 @@ import org.bukkit.block.data.type.Repeater;
 import org.bukkit.block.data.type.Slab;
 import org.bukkit.block.data.type.Slab.Type;
 import org.bukkit.block.data.type.Stairs.Shape;
+import org.bukkit.entity.Player;
 
 import com.aymegike.huminekingdom.utils.BlockList;
 import com.aypi.manager.FileManager;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class Shematic {
 	
@@ -28,13 +36,16 @@ public class Shematic {
 	
 	private File file;
 	
+	private Kingdom kingdom;
+	private ShieldGenerator sg;
 	private int task;
 	private int index = 0;	
 	
 	public Shematic(Kingdom kingdom, String name, ShieldGenerator sg) {
 		
 		this.name = name;
-		
+		this.kingdom = kingdom;
+		this.sg = sg;
 		file = new File(kingdom.getShematicFile().getAbsolutePath()+"/"+name+"_"+sg.getLocation().getWorld().getName()+"_"+sg.getLocation().getBlockX()+"_"+sg.getLocation().getBlockY()+"_"+sg.getLocation().getBlockZ()+".craft");
 		
 		if (!file.exists()) {
@@ -43,7 +54,6 @@ public class Shematic {
 			
 			for (Location loc : sg.getZone().getSquare().getScareLoc()) {
 				if (!BlockList.getBlackList(loc.getBlock().getType())) {
-					
 					print.add(getLineToPrint(loc));
 				}
 			}
@@ -66,6 +76,7 @@ public class Shematic {
 				if (index >= str.size()) {
 					Bukkit.getScheduler().cancelTask(task);
 					index = 0;
+					sendEndMessage();
 					return;
 				}
 				
@@ -75,6 +86,8 @@ public class Shematic {
 					index++;
 					if (index >= str.size()) {
 						Bukkit.getScheduler().cancelTask(task);
+						index = 0;
+						sendEndMessage();
 						return;
 					}
 					line = str.get(index).split(" ");
@@ -86,6 +99,20 @@ public class Shematic {
 					
 					//SET ++
 					Block block = new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])).getBlock();
+					Random r = new Random();
+					boolean anvil = r.nextInt(100) == 0;
+					boolean piston = r.nextInt(100) == 1;
+					for (Player pls : Bukkit.getOnlinePlayers()) {
+						pls.playSound(block.getLocation(), Sound.BLOCK_STONE_PLACE, 5, 1);
+						
+						if (anvil) {
+							pls.playSound(block.getLocation(), Sound.BLOCK_ANVIL_USE, 5, 1);
+						}
+						
+						if (piston) {
+							pls.playSound(block.getLocation(), Sound.BLOCK_PISTON_EXTEND, 5, 1);
+						}
+					}
 					
 					if (block.getBlockData() instanceof Directional ) { //CLASSIQUE
 						
@@ -135,34 +162,19 @@ public class Shematic {
 						block.setBlockData(c);
 					}
 					
+					if (block.getBlockData() instanceof Leaves) {
+						Leaves l = (Leaves) block.getBlockData();
+						l.setPersistent(true);
+						block.setBlockData(l);
+					}
 					
-//					if (block.getBlockData() instanceof Door) { //DOORS
-//										
-//						
-//						if (Half.valueOf(line[7]) == Half.BOTTOM) {
-//							
-//							Block b = new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2])+1, Integer.parseInt(line[3])).getBlock();
-//							//b.setType(Material.matchMaterial(line[4]));
-//							
-//							Door d = (Door) block.getBlockData();
-//							d.setHinge(Hinge.valueOf(line[6]));
-//							d.setHalf(Half.BOTTOM);
-//							
-//							block.setBlockData(d);
-//							
-//							d = (Door) b.getBlockData();
-//							d.setHinge(Hinge.valueOf(line[6]));
-//							d.setHalf(Half.TOP);
-//							
-//							block.setBlockData(d);
-//							
-//							
-//							
-//						} else {
-//							block.setType(Material.AIR);
-//						}
-//						
-//					} 
+					if (block.getBlockData() instanceof Rail) {
+						Rail r1 = (Rail) block.getBlockData();
+						r1.setShape(Rail.Shape.valueOf(line[6]));
+						
+						block.setBlockData(r1);
+					}
+					
 					
 				}
 					
@@ -180,6 +192,15 @@ public class Shematic {
 	
 	public File getFile() {
 		return file;
+	}
+	
+	private void sendEndMessage() {
+		for (OfflinePlayer op : this.kingdom.getMembers()) {
+			if (op.isOnline()) {
+				op.getPlayer().sendMessage(ChatColor.GREEN+"Reconstruction terminée !");
+				op.getPlayer().playSound(op.getPlayer().getLocation(), Sound.BLOCK_BEACON_ACTIVATE, 5, 1);
+			}
+		}
 	}
 	
 	private String getLineToPrint(Location loc) {
@@ -231,8 +252,33 @@ public class Shematic {
 			lineToPrint += " "+c.getMode().toString();
 		}
 		
+		if (loc.getBlock().getBlockData() instanceof Rail) {
+			Rail r = (Rail) loc.getBlock().getBlockData();
+			lineToPrint += " "+r.getShape();
+		}
+		
+		
 		return lineToPrint;
 		
+	}
+	
+	public Kingdom getkingdom() {
+		return this.kingdom;
+	}
+
+	public void refresh() {
+		
+		ArrayList<String> print = new ArrayList<String>();
+		
+		for (Location loc : sg.getZone().getSquare().getScareLoc()) {
+			if (!BlockList.getBlackList(loc.getBlock().getType())) {
+				print.add(getLineToPrint(loc));
+			}
+		}
+		
+		FileManager fm = new FileManager(file);
+		fm.clearFile();
+		fm.printList(print);
 	}
 
 }

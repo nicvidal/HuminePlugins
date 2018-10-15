@@ -11,8 +11,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.aymegike.huminekingdom.HumineKingdom;
+import com.aymegike.huminekingdom.utils.models.Kingdom;
 import com.aymegike.huminekingdom.utils.models.ShieldGenerator;
 
 public class PlayerClick implements Listener { 
@@ -41,6 +43,21 @@ public class PlayerClick implements Listener {
 			}
 			
 			getBeacon.remove(e.getPlayer());
+		}
+		
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK && HumineKingdom.getPlayerKingdom(e.getPlayer()) != null) {
+			Kingdom kingdom = HumineKingdom.getPlayerKingdom(e.getPlayer());
+			
+			if (kingdom.getShieldGenerator(e.getClickedBlock().getLocation()) != null && !kingdom.getShieldGenerator(e.getClickedBlock().getLocation()).isActive() ) {
+				
+				if (e.getItem().getType() == Material.BEACON) {
+					e.setCancelled(true);
+					kingdom.regeneShield(kingdom.getShieldGenerator(e.getClickedBlock().getLocation()));
+					e.getPlayer().getInventory().remove(new ItemStack(Material.BEACON));
+				}
+				
+			}
+	
 		}
 	}
 
