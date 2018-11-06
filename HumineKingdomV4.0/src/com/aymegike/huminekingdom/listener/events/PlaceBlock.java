@@ -35,7 +35,7 @@ public class PlaceBlock implements Listener {
 				Square square = new Square(new Location(e.getBlock().getLocation().getWorld(), e.getBlock().getLocation().getBlockX()-60, 0, e.getBlock().getLocation().getBlockZ()-60), new Location(e.getBlock().getLocation().getWorld(), e.getBlock().getLocation().getBlockX()+60, 300, e.getBlock().getLocation().getBlockZ()+60));
 				
 				k.addShield(new ShieldGenerator(k, e.getBlock().getLocation(), new Zone(square , HumineKingdom.getZoneListener(k)), true));
-				player.sendMessage(ChatColor.BLUE+"Bravos a toi ! Tu viens de placer un générateur de bouclié. ");
+				player.sendMessage(ChatColor.BLUE+"Bravos a toi ! Tu viens de placer un gÃ©nÃ©rateur de boucliÃ©. ");
 				
 			} else {
 				
