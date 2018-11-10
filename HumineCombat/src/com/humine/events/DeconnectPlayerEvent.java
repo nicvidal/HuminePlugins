@@ -16,7 +16,6 @@ public class DeconnectPlayerEvent implements Listener {
 	public void onQuit(PlayerQuitEvent event) {
 		final Player player = event.getPlayer();
 		
-		
 		ArmorStand as = new ArmorStand(player);
 		
 		Timer timer = new Timer(BattleMain.getInstance(), 120, player.getName(), new TimerFinishListener() {
