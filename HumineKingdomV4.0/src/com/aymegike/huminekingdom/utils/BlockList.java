@@ -8,9 +8,7 @@ public class BlockList {
 		{Material.AIR, 
 		Material.VOID_AIR, 
 		Material.BEDROCK, 
-		Material.WATER, 
-		Material.CHEST, 
-		Material.FURNACE, 	
+		Material.WATER,	
 		Material.LAVA, 
 		Material.CAVE_AIR, 
 		

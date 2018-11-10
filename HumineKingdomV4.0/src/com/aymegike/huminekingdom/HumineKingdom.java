@@ -70,9 +70,11 @@ public class HumineKingdom extends JavaPlugin {
 	
 	public static Grade getPlayerGrade(OfflinePlayer player) {
 		
-		for (Grade grade : HumineKingdom.getPlayerKingdom(player).getGrades()) {
-			if (grade.getMembers().contains(player)) {
-				return grade;
+		if (HumineKingdom.getPlayerKingdom(player) != null) {
+			for (Grade grade : HumineKingdom.getPlayerKingdom(player).getGrades()) {
+				if (grade.getMembers().contains(player)) {
+					return grade;
+				}
 			}
 		}
 		

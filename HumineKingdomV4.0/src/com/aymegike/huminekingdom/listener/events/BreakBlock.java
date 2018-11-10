@@ -20,7 +20,11 @@ public class BreakBlock implements Listener {
 				for (int i = 0 ; i < kingdom.getShieldGenerators().size() ; i++) {
 					if (kingdom.getShieldGenerators().get(i).getLocation().getWorld() == e.getBlock().getLocation().getWorld() && kingdom.getShieldGenerators().get(i).getLocation().getBlockX() == e.getBlock().getLocation().getBlockX()
 					&& kingdom.getShieldGenerators().get(i).getLocation().getBlockY() == e.getBlock().getLocation().getBlockY() && kingdom.getShieldGenerators().get(i).getLocation().getBlockZ() == e.getBlock().getLocation().getBlockZ()) {
-						kingdom.removeShield(kingdom.getShieldGenerators().get(i));
+						if (HumineKingdom.getPlayerKingdom(e.getPlayer()) == kingdom) {
+							kingdom.removeShield(kingdom.getShieldGenerators().get(i));
+						} else { 
+							kingdom.breakShield(kingdom.getShieldGenerators().get(i));
+						}
 						i--;
 						for (OfflinePlayer op : kingdom.getMembers()) {
 							

@@ -85,6 +85,19 @@ public class Permissions {
 		}
 	});
 	
+	public final static PermData BEACON_GESTION = new PermData("BEACON_GESTION", "kingdom.gestion.beacon", new FillList() {
+		
+		@Override
+		public ArrayList<String> fillList() {
+			ArrayList<String> list = new ArrayList<String>();
+			list.add("Donne l'autorisation de creer, de");
+			list.add("supprimer, ou encore de rafraichir");
+			list.add("un plans de construction.");
+			return list;
+		}
+		
+	});
+	
 	public static ArrayList<PermData> getAllPermissions(){
 		ArrayList<PermData> perms = new ArrayList<PermData>();
 		perms.add(BUILD);
@@ -93,6 +106,7 @@ public class Permissions {
 		perms.add(GRADE);
 		perms.add(CHAT);
 		perms.add(INVITE_NEW_PLAYER);
+		perms.add(BEACON_GESTION);
 		return perms;
 	}
 

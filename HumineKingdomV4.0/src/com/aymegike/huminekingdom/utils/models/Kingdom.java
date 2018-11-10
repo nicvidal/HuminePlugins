@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 
 import com.aymegike.huminekingdom.HumineKingdom;
@@ -63,7 +65,7 @@ public class Kingdom {
 		if (shieldFile.exists()) {
 			for (int i = 0 ; i<new com.aypi.manager.FileManager(shieldFile).getTextFile().size() ; i++) {
 				String[] line = new com.aypi.manager.FileManager(shieldFile).getTextFile().get(i).split(" ");
-				shieldGenerators.add(new ShieldGenerator(this, new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])), new Zone(new Square(new Location(Bukkit.getWorld(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6]), Integer.parseInt(line[7])), new Location(Bukkit.getWorld(line[8]), Integer.parseInt(line[9]), Integer.parseInt(line[10]), Integer.parseInt(line[11]))), HumineKingdom.getZoneListener(this))));
+				shieldGenerators.add(new ShieldGenerator(this, new Location(Bukkit.getWorld(line[0]), Integer.parseInt(line[1]), Integer.parseInt(line[2]), Integer.parseInt(line[3])), new Zone(new Square(new Location(Bukkit.getWorld(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6]), Integer.parseInt(line[7])), new Location(Bukkit.getWorld(line[8]), Integer.parseInt(line[9]), Integer.parseInt(line[10]), Integer.parseInt(line[11]))), HumineKingdom.getZoneListener(this)), Boolean.getBoolean(line[12])));
 			}
 		}
 		
@@ -185,7 +187,7 @@ public class Kingdom {
 		updateShieldGeneratorMenu();
 		new com.aypi.manager.FileManager(shieldFile).printLine(shieldGenerator.getLocation().getWorld().getName()+" "+shieldGenerator.getLocation().getBlockX()+" "+shieldGenerator.getLocation().getBlockY()+" "+shieldGenerator.getLocation().getBlockZ()
 				+" "+shieldGenerator.getZone().getSquare().getPos1().getWorld().getName()+" "+shieldGenerator.getZone().getSquare().getPos1().getBlockX()+" "+shieldGenerator.getZone().getSquare().getPos1().getBlockY()+" "+shieldGenerator.getZone().getSquare().getPos1().getBlockZ()
-				+" "+shieldGenerator.getZone().getSquare().getPos2().getWorld().getName()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockX()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockY()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockZ());
+				+" "+shieldGenerator.getZone().getSquare().getPos2().getWorld().getName()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockX()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockY()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockZ()+" "+shieldGenerator.isActive());
 		
 	}
 	
@@ -205,6 +207,53 @@ public class Kingdom {
 		
 		new com.aypi.manager.FileManager(shieldFile).removeAllLine(line);
 		shieldGenerators.remove(shieldGenerator);
+	}
+	
+	public void breakShield(ShieldGenerator shieldGenerator) {
+		shieldGenerator.getLocation().getBlock().setType(Material.BEDROCK);
+		
+		shieldGenerator.setActive(false);
+		updateShield(shieldGenerator);
+		shieldGenerator.getLocation().getWorld().createExplosion(shieldGenerator.getLocation(), 4.0f);
+		for (OfflinePlayer pls : members) {
+			if (pls.isOnline()) {
+				pls.getPlayer().sendMessage(ChatColor.RED+"Un générateur de bouclier a été désactivé.");
+			}
+		}
+	}
+	
+	public void regeneShield(ShieldGenerator shieldGenerator) {
+		shieldGenerator.getLocation().getBlock().setType(Material.BEACON);
+		shieldGenerator.setActive(true);
+		updateShield(shieldGenerator);
+		for (OfflinePlayer pls : members) {
+			if (pls.isOnline()) {
+				pls.getPlayer().sendMessage(ChatColor.GREEN+"Un générateur de bouclier a été réactivé.");
+			}
+		}
+	}
+	
+	private void updateShield(ShieldGenerator shieldGenerator) {
+		
+		String line = "";
+		
+		for (String str : new com.aypi.manager.FileManager(shieldFile).getTextFile()) {
+			String[] arg = str.split(" ");
+			if (arg[0].equalsIgnoreCase(shieldGenerator.getLocation().getWorld().getName())
+			&& arg[1].equalsIgnoreCase(shieldGenerator.getLocation().getBlockX()+"")
+			&& arg[2].equalsIgnoreCase(shieldGenerator.getLocation().getBlockY()+"")
+			&& arg[3].equalsIgnoreCase(shieldGenerator.getLocation().getBlockZ()+"")) {
+				line = str;
+				Aypi.getZoneManager().removeZone(shieldGenerator.getZone());
+			}
+		}
+		
+		new com.aypi.manager.FileManager(shieldFile).removeAllLine(line);
+		
+		new com.aypi.manager.FileManager(shieldFile).printLine(shieldGenerator.getLocation().getWorld().getName()+" "+shieldGenerator.getLocation().getBlockX()+" "+shieldGenerator.getLocation().getBlockY()+" "+shieldGenerator.getLocation().getBlockZ()
+				+" "+shieldGenerator.getZone().getSquare().getPos1().getWorld().getName()+" "+shieldGenerator.getZone().getSquare().getPos1().getBlockX()+" "+shieldGenerator.getZone().getSquare().getPos1().getBlockY()+" "+shieldGenerator.getZone().getSquare().getPos1().getBlockZ()
+				+" "+shieldGenerator.getZone().getSquare().getPos2().getWorld().getName()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockX()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockY()+" "+shieldGenerator.getZone().getSquare().getPos2().getBlockZ()+" "+shieldGenerator.isActive());
+		
 	}
 	
 	public void addShematic(Shematic s) {

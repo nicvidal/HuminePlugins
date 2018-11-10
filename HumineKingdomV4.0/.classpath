@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/programmation/java/API/spigot-1.13.1.jar"/>
-	<classpathentry kind="lib" path="D:/programmation/java/API/AYPI.V1.4.1.jar"/>
+	<classpathentry kind="lib" path="/home/aymeric/prog/java/workspace/HumineCraft/HuminePlugins/lib/AYPI.V1.3.jar"/>
+	<classpathentry kind="lib" path="/home/aymeric/prog/java/workspace/HumineCraft/HuminePlugins/lib/spigot-1.13.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

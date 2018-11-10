@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/allan/Desktop/jeux/Minecraft/Serveur 1.13.1/plugins/AYPI.V1.4.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/allan/Desktop/jeux/Minecraft/Serveur 1.13.1/spigot-1.13.1.jar" sourcepath="Boussole/C:/Users/allan/Desktop/jeux/Minecraft/spigot source"/>
+=======
+>>>>>>> 3489e37637db6ea2e509c06d76532ff8dc36638b
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/programmation/java/API/AYPI.V1.4.1.jar"/>
+	<classpathentry kind="lib" path="D:/programmation/java/API/spigot-1.13.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

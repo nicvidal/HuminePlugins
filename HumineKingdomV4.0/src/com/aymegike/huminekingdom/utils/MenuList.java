@@ -16,6 +16,7 @@ import com.aymegike.huminekingdom.listener.events.PlayerChatEvent;
 import com.aymegike.huminekingdom.listener.events.PlayerClick;
 import com.aymegike.huminekingdom.utils.models.Grade;
 import com.aymegike.huminekingdom.utils.models.Shematic;
+import com.aypi.manager.FileManager;
 import com.aypi.utils.Button;
 import com.aypi.utils.Menu;
 import com.aypi.utils.inter.MenuItemListener;
@@ -508,6 +509,18 @@ public class MenuList {
 			@Override
 			public void onItemClick() {
 				if (HumineKingdom.getPlayerKingdom(player) == HumineKingdom.getPlayerKingdom(target)) {
+					
+					if (HumineKingdom.getPlayerGrade(target) != null && HumineKingdom.getPlayerGrade(target).getName().equalsIgnoreCase(HumineKingdom.getPlayerKingdom(target).getKingGradeName())) {
+						for(OfflinePlayer op : HumineKingdom.getPlayerKingdom(player).getMembers()) {
+							if (op.isOnline()) {
+								op.getPlayer().sendMessage(ChatColor.RED+"Tentative de mutinerie de la part de "+ChatColor.WHITE+player.getName()+ChatColor.RED+" dejouer !");
+								op.getPlayer().playSound(op.getPlayer().getLocation(), Sound.ENTITY_VILLAGER_NO, 5, 1);
+							}
+						}
+						player.sendMessage(ChatColor.ITALIC+"(je crois que tu t'es grillé)");
+						return; 
+					}
+					
 					if (HumineKingdom.getPlayerGrade(player) != null && HumineKingdom.getPlayerGrade(player).containPermission(Permissions.GRADE.getPermission()) && !player.getName().equalsIgnoreCase(target.getName())) {
 						menu.closePlayerMenu();
 						player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 5, 1);
@@ -1039,7 +1052,7 @@ public class MenuList {
 		return menu;
 	}
 	
-	//SHIELD MENU
+	//SHIELDLIST MENU
 	public static Menu GestionMenu(Player player) {
 		
 		closePlayerMenu(player);
@@ -1093,9 +1106,14 @@ public class MenuList {
 			
 			@Override
 			public void onItemClick() {
-				player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 5, 1);
-				menu.closePlayerMenu();
-				MenuList.shematicMenu(player).openMenu();
+				if (HumineKingdom.getPlayerGrade(player) != null && HumineKingdom.getPlayerGrade(player).containPermission(Permissions.BEACON_GESTION.getPermission())) {
+					player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 5, 1);
+					menu.closePlayerMenu();
+					MenuList.shematicMenu(player).openMenu();
+				} else {
+					player.sendMessage(ChatColor.RED+"Désolé l'ami mais tu n'en as pas la permission. \n(Demande le l'aide a un adulte)");
+					player.playSound(player.getLocation(), Sound.ENTITY_SHULKER_AMBIENT, 5, 1);
+				}
 			}
 			
 		}));
@@ -1119,7 +1137,7 @@ public class MenuList {
 	//SHEMATIC MENU
 	public static Menu shematicMenu(Player player) {
 		closePlayerMenu(player);
-		int size = HumineKingdom.getPlayerKingdom(player).getMembers().size();
+		int size = HumineKingdom.getPlayerKingdom(player).getShematics().size();
 		int c = 0;
 		int multi = 1;
 		for(int i = 1 ; i<size-2 ; i++){
@@ -1172,8 +1190,9 @@ public class MenuList {
 				@Override
 				public void onItemClick() {
 						menu.closePlayerMenu();
-					 	s.rebuild();
-					 	player.sendMessage(ChatColor.GREEN+"Reconstruction");
+					 	player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 5, 1);
+					 	MenuList.shematicsMenu(player, s).openMenu();
+					 	MenuList.user.remove(menu);
 				}
 				
 			}));
@@ -1221,7 +1240,112 @@ public class MenuList {
 			public void onItemClick() {
 				menu.closePlayerMenu();
 				player.playSound(player.getLocation(), Sound.BLOCK_SNOW_FALL, 5, 1);
-				MenuList.membersMenu(player).openMenu();
+				MenuList.shematicMenu(player).openMenu();
+			}
+			
+		}));
+		
+		MenuList.user.add(menu);
+		return menu;
+	}
+	
+	//SHEMATICS MENU
+	public static Menu shematicsMenu(Player player, Shematic shemtatic) {
+		closePlayerMenu(player);
+		Menu menu = new Menu(player, "- "+shemtatic.getName()+" -", 3*9, false);
+		
+		ItemStack glass = new ItemStack(Material.BLACK_STAINED_GLASS_PANE, 1);
+		ItemMeta glassM = glass.getItemMeta();
+		glassM.setDisplayName(" ");
+		glass.setItemMeta(glassM);
+		
+		menu.fillLine(glass, 1);
+		menu.fillLine(glass, 3);
+		
+		glass = new ItemStack(Material.PURPLE_STAINED_GLASS_PANE, 1);
+		glassM = glass.getItemMeta();
+		glassM.setDisplayName(" ");
+		glass.setItemMeta(glassM);
+		
+		menu.fillLine(glass, 2);
+		
+		ItemStack back = new ItemStack(Material.BARRIER);
+		ItemMeta backm = back.getItemMeta();
+		backm.setDisplayName(ChatColor.RED+"retour");
+		back.setItemMeta(backm);
+		
+		ArrayList<String> lore = new ArrayList<String>();
+		
+		lore.add(ChatColor.GOLD+"~~~~~~~~~~~~~~~~~~~");
+		lore.add(ChatColor.DARK_PURPLE+"bloques: "+ChatColor.WHITE+ChatColor.ITALIC+new FileManager(shemtatic.getFile()).getTextFile().size());
+		lore.add(ChatColor.GOLD+"~~~~~~~~~~~~~~~~~~~");
+		lore.add("");
+		lore.add(ChatColor.GREEN+"Clique pour refaire un nouveau \nscanne de la zone.");
+		
+		ItemStack membre = new ItemStack(Material.PAPER);
+		ItemMeta membrem = membre.getItemMeta();
+		membrem.setDisplayName(ChatColor.BLUE+shemtatic.getName());
+		membrem.setLore(lore);
+		membre.setItemMeta(membrem);
+		
+		lore.clear();
+		
+		ItemStack paper = new ItemStack(Material.ANVIL);
+		ItemMeta paperm = paper.getItemMeta();
+		paperm.setDisplayName(ChatColor.GREEN+"Reconstruire "+ChatColor.WHITE+shemtatic.getName());
+		paper.setItemMeta(paperm);
+		
+		ItemStack quitter = new ItemStack(Material.REDSTONE_BLOCK);
+		ItemMeta quitterm = quitter.getItemMeta();
+		quitterm.setDisplayName(ChatColor.RED+"Supprimer le plans: "+ChatColor.WHITE+shemtatic.getName());	
+		quitter.setItemMeta(quitterm);
+		
+		menu.setButton(3*9-1, new Button(back, new MenuItemListener() {
+			
+			@Override
+			public void onItemClick() {
+				menu.closePlayerMenu();
+				player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 5, 1);
+				MenuList.shematicMenu(player).openMenu();
+			}
+			
+		}));
+		
+		menu.setButton(1*9+1, new Button(paper, new MenuItemListener() {
+			
+			@Override
+			public void onItemClick() {
+				menu.closePlayerMenu();
+			 	shemtatic.rebuild();
+			 	player.sendMessage(ChatColor.DARK_PURPLE+"Reconstruction de "+shemtatic.getName()+".");
+			 	player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 5, 1);
+			}
+			
+		}));
+		
+		menu.setButton(2*9-2, new Button(quitter, new MenuItemListener() {
+			
+			@Override
+			public void onItemClick() {
+				player.sendMessage(ChatColor.RED+"Tu a supprimé "+shemtatic.getName());
+				shemtatic.getkingdom().removeShematic(shemtatic);
+				menu.closePlayerMenu();
+				MenuList.shematicMenu(player).openMenu();
+			}
+			
+		}));
+		
+		menu.setButton(9*2-5, new Button(membre, new MenuItemListener() {
+			
+			@Override
+			public void onItemClick() {
+				menu.closePlayerMenu();
+				player.sendMessage(ChatColor.GREEN+"Scanne de la zone en cours...");
+				player.playSound(player.getLocation(), Sound.BLOCK_BEACON_AMBIENT, 5, 1);
+				shemtatic.refresh();
+				player.sendMessage(ChatColor.GREEN+"Scanne terminé.");
+				player.playSound(player.getLocation(), Sound.BLOCK_BEACON_POWER_SELECT, 5, 1);
+				MenuList.shematicsMenu(player, shemtatic).openMenu();
 			}
 			
 		}));

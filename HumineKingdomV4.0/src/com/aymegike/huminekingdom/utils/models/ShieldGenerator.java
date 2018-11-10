@@ -9,11 +9,13 @@ public class ShieldGenerator {
 	private Kingdom kingdom;
 	private Location location;
 	private Zone zone;
+	private boolean isActive;
 	
-	public ShieldGenerator(Kingdom kingdom, Location location, Zone zone) {
+	public ShieldGenerator(Kingdom kingdom, Location location, Zone zone, boolean isActive) {
 		this.kingdom = kingdom;
 		this.location = location;
 		this.zone = zone;
+		this.isActive = isActive;
 	}
 	
 	public Kingdom getKingdom() {
@@ -26,6 +28,14 @@ public class ShieldGenerator {
 	
 	public Zone getZone() {
 		return zone;
+	}
+	
+	public boolean isActive() {
+		return isActive;
+	}
+	
+	public void setActive(boolean active) {
+		this.isActive = active;
 	}
 
 }
