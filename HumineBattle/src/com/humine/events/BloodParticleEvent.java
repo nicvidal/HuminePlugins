@@ -17,8 +17,8 @@ public class BloodParticleEvent implements Listener {
 
 		if (entity instanceof org.bukkit.entity.ArmorStand) {
 			for (ArmorStand as : BattleMain.getInstance().getArmors()) {
-				if (as.getName().equalsIgnoreCase(entity.getCustomName())) {
-					entity.getWorld().spawnParticle(Particle.REDSTONE, entity.getLocation(), 5);
+				if (as.getCustomName().equalsIgnoreCase(entity.getCustomName())) {
+					entity.getWorld().spawnParticle(Particle.REDSTONE, entity.getLocation(), 0);
 					break;
 				}
 			}

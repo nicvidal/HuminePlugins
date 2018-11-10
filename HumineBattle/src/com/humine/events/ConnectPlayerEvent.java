@@ -17,7 +17,7 @@ public class ConnectPlayerEvent implements Listener {
 		final Player player = event.getPlayer();
 
 		for (ArmorStand as : BattleMain.getInstance().getArmors()) {
-			if (as.getName().equalsIgnoreCase(player.getName())) {
+			if (as.getCustomName().equals(player.getName())) {
 				for (Timer timer : Aypi.getTimerManager().getTimers()) {
 					if (timer.getName().equals(player.getName())) {
 						timer.finish();

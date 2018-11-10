@@ -11,7 +11,7 @@ public class ArmorStand {
 	private EulerAngle angle;
 	private org.bukkit.entity.ArmorStand armorStand;
 	
-	public ArmorStand(Player player) {
+	public ArmorStand(final Player player) {
 		this.armorStand = player.getWorld().spawn(player.getLocation(), org.bukkit.entity.ArmorStand.class);
 		this.angle = new EulerAngle(0.0, 90.0, 0.0);
 		this.name = player.getName();
@@ -28,19 +28,18 @@ public class ArmorStand {
 		this.armorStand.setInvulnerable(false);
 		this.armorStand.setHealth(20.0);
 		
-		this.armorStand.setHelmet(player.getInventory().getHelmet());
-		this.armorStand.setChestplate(player.getInventory().getChestplate());
-		this.armorStand.setLeggings(player.getInventory().getLeggings());
-		this.armorStand.setBoots(player.getInventory().getBoots());
+		if(player.getInventory().getHelmet() != null)
+			this.armorStand.setHelmet(player.getInventory().getHelmet());
+		if(player.getInventory().getChestplate() != null)
+			this.armorStand.setChestplate(player.getInventory().getChestplate());
+		if(player.getInventory().getLeggings() != null)
+			this.armorStand.setLeggings(player.getInventory().getLeggings());
+		if(player.getInventory().getBoots() != null)
+			this.armorStand.setBoots(player.getInventory().getBoots());
+		if(player.getInventory().getItemInMainHand() != null)
+			this.armorStand.setItemInHand(player.getInventory().getItemInMainHand());
 		
 		BattleMain.getInstance().getArmors().add(this);
-	}
-	
-	public boolean exist() {
-		if(this.armorStand.isDead())
-			return true;
-		else
-			return false;
 	}
 	
 	public void kill() {
@@ -48,11 +47,11 @@ public class ArmorStand {
 		BattleMain.getInstance().getArmors().remove(this);
 	}
 
-	public String getName() {
+	public String getCustomName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setCustomName(String name) {
 		this.name = name;
 	}
 

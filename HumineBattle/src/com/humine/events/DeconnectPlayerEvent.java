@@ -23,8 +23,7 @@ public class DeconnectPlayerEvent implements Listener {
 			
 			@Override
 			public void execute() {
-				if(as.exist())
-					as.kill();
+				as.getArmorStand().remove();
 			}
 		});
 		
