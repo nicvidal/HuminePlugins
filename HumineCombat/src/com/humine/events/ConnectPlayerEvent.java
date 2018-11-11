@@ -16,7 +16,7 @@ public class ConnectPlayerEvent implements Listener {
 		final Player player = event.getPlayer();
 
 		if (hasArmorStand(player)) {
-			
+
 			if (armorStandIsDead(player)) {
 				player.setHealth(0.0);
 			}
@@ -90,7 +90,7 @@ public class ConnectPlayerEvent implements Listener {
 		return dead;
 	}
 
-	// permet de supprimer l'armorStand du jeu et de la liste de BattleMain
+	// permet de supprimer l'armorStand du jeu
 	private void removeArmorStand(Player player) {
 		boolean remove = false;
 		int i = 0;
@@ -110,6 +110,7 @@ public class ConnectPlayerEvent implements Listener {
 
 	}
 
+	// permet de supprimer l'armorStand de la liste de BattleMain
 	private void removeArmorStandFromList(Player player) {
 		boolean remove = false;
 		int i = 0;
