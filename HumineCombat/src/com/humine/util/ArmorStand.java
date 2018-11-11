@@ -1,6 +1,7 @@
 package com.humine.util;
 
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 import com.humine.main.BattleMain;
 
@@ -8,10 +9,14 @@ public class ArmorStand {
 
 	private String name;
 	private org.bukkit.entity.ArmorStand armorStand;
+	private ItemStack[] inventory;
 	
 	public ArmorStand(Player player) {
 		this.armorStand = player.getWorld().spawn(player.getLocation(), org.bukkit.entity.ArmorStand.class);
 		this.name = player.getName();
+		
+		this.inventory = player.getInventory().getContents();
+		
 		
 		this.armorStand.setBasePlate(false);
 		this.armorStand.setSmall(false);
@@ -32,8 +37,6 @@ public class ArmorStand {
 			this.armorStand.setLeggings(player.getInventory().getLeggings());
 		if(player.getInventory().getBoots() != null)
 			this.armorStand.setBoots(player.getInventory().getBoots());
-		if(player.getInventory().getItemInMainHand() != null)
-			this.armorStand.setItemInHand(player.getInventory().getItemInMainHand());
 		
 		BattleMain.getInstance().getArmors().add(this);
 	}
@@ -48,5 +51,13 @@ public class ArmorStand {
 
 	public org.bukkit.entity.ArmorStand getArmorStand() {
 		return armorStand;
+	}
+
+	public ItemStack[] getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(ItemStack[] inventory) {
+		this.inventory = inventory;
 	}
 }

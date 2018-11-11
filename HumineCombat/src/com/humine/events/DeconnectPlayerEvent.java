@@ -1,5 +1,6 @@
 package com.humine.events;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,18 +16,22 @@ public class DeconnectPlayerEvent implements Listener {
 	@EventHandler
 	public void onQuit(PlayerQuitEvent event) {
 		final Player player = event.getPlayer();
+		Timer timer;
 		
-		ArmorStand as = new ArmorStand(player);
-		
-		Timer timer = new Timer(BattleMain.getInstance(), 120, player.getName(), new TimerFinishListener() {
+		if(player.getGameMode() == GameMode.SURVIVAL) {
+			ArmorStand as = new ArmorStand(player);
 			
-			@Override
-			public void execute() {
-				as.getArmorStand().remove();
-			}
-		});
+			timer = new Timer(BattleMain.getInstance(), 120, player.getName(), new TimerFinishListener() {
+				
+				@Override
+				public void execute() {
+					as.getArmorStand().remove();
+				}
+			});
+			
+			timer.start();
+		}
 		
-		timer.start();
 		
 	}
 }

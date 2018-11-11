@@ -3,6 +3,7 @@ package com.humine.events;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.aypi.Aypi;
@@ -15,12 +16,24 @@ public class ConnectPlayerEvent implements Listener {
 		final Player player = event.getPlayer();
 
 		if (hasArmorStand(player)) {
+			
 			if (armorStandIsDead(player)) {
-				player.damage(player.getHealth());
+				player.setHealth(0.0);
 			}
 
-			TimerFinish(player);
 			removeArmorStand(player);
+			TimerFinish(player);
+		}
+	}
+
+	@EventHandler
+	public void onDrop(PlayerDeathEvent event) {
+		if (event.getEntity() instanceof Player) {
+			Player player = event.getEntity();
+			if (hasArmorStand(player)) {
+				removeArmorStandFromList(player);
+				event.getDrops().clear();
+			}
 		}
 	}
 
@@ -90,12 +103,25 @@ public class ConnectPlayerEvent implements Listener {
 					BattleMain.getInstance().getArmors().get(i).getArmorStand().remove();
 				}
 
-				BattleMain.getInstance().getArmors().remove(BattleMain.getInstance().getArmors().get(i));
 			}
 
 			i++;
 		}
 
+	}
+
+	private void removeArmorStandFromList(Player player) {
+		boolean remove = false;
+		int i = 0;
+
+		while (i < BattleMain.getInstance().getArmors().size() && remove == false) {
+
+			if (BattleMain.getInstance().getArmors().get(i).getCustomName().equals(player.getName())) {
+				BattleMain.getInstance().getArmors().remove(BattleMain.getInstance().getArmors().get(i));
+			}
+
+			i++;
+		}
 	}
 
 }

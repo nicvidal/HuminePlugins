@@ -1,49 +1,77 @@
 package com.humine.events;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.ItemStack;
 
 import com.humine.main.BattleMain;
 
 public class ArmorDeadEvent implements Listener {
 
 	@EventHandler
-	public void onDead(EntityDeathEvent event) {
-		final Entity entity = event.getEntity();
-		final Entity killer = event.getEntity().getKiller();
+	public void onDead(EntityDamageByEntityEvent event) {
+		Entity victim = event.getEntity();
+		Entity damager = event.getDamager();
+		com.humine.util.ArmorStand armorStandUtil;
+		ArmorStand armorStandVictim = null;
 
-		if (entity instanceof ArmorStand && killer instanceof Player) {
+		if (victim instanceof ArmorStand) {
+			armorStandVictim = (ArmorStand) victim;
+			armorStandUtil = getArmorStandUtil(armorStandVictim);
 
-			com.humine.util.ArmorStand armor = getArmorStand((Player) killer);
+			if (armorStandUtil != null) {
+				armorStandUtil.getArmorStand().setHealth((armorStandUtil.getArmorStand().getHealth() - 5.0));
 
-			if (armor != null) {
-				for (Player player : Bukkit.getOnlinePlayers()) {
-					BattleMain.sendMessage(player, ChatColor.GREEN + armor.getCustomName() + ChatColor.RESET + " was slain by " + ChatColor.RED + killer.getName());
+				if (armorStandUtil.getArmorStand().getHealth() <= 0.0) {
+					armorStandUtil.getArmorStand().remove();
+					
+					if (damager instanceof Player) {
+						for (Player p : Bukkit.getOnlinePlayers())
+							BattleMain.sendMessage(p, armorStandUtil.getCustomName() + " was slain by " + damager.getName() + " (Disconnected)");
+					} else {
+						for (Player p : Bukkit.getOnlinePlayers())
+							BattleMain.sendMessage(p, armorStandUtil.getCustomName() + " was killed");
+					}
+
+					dropArmor(armorStandUtil.getArmorStand(), armorStandUtil.getInventory());
 				}
+
 			}
 
 		}
 	}
 
-	private com.humine.util.ArmorStand getArmorStand(Player player) {
-		com.humine.util.ArmorStand playerArmor = null;
-
-		int i = 0;
-		boolean find = false;
-
-		while (i < BattleMain.getInstance().getArmors().size() && find == false) {
-			if (BattleMain.getInstance().getArmors().get(i).getCustomName().equals(player.getName())) {
-				find = true;
-				playerArmor = BattleMain.getInstance().getArmors().get(i);
+	private void dropArmor(ArmorStand armor, ItemStack[] inventory) {
+		if (inventory != null) {
+			for (int i = 0; i < inventory.length; i++) {
+				if (inventory[i] != null) {
+					if (inventory[i].getType() != Material.AIR) {
+						armor.getLocation().getWorld().dropItem(armor.getLocation(), inventory[i]);
+					}
+				}
 			}
 		}
+	}
 
-		return playerArmor;
+	private com.humine.util.ArmorStand getArmorStandUtil(ArmorStand armorStand) {
+		boolean find = false;
+		int i = 0;
+		com.humine.util.ArmorStand armor = null;
+
+		while (i < BattleMain.getInstance().getArmors().size() && find == false) {
+			if (BattleMain.getInstance().getArmors().get(i).getArmorStand().equals(armorStand)) {
+				find = true;
+				armor = BattleMain.getInstance().getArmors().get(i);
+			}
+			i++;
+		}
+
+		return armor;
 	}
 }
