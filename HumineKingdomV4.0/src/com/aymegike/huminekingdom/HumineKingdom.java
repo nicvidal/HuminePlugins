@@ -16,6 +16,7 @@ import com.aymegike.huminekingdom.listener.CommandManager;
 import com.aymegike.huminekingdom.utils.MenuList;
 import com.aymegike.huminekingdom.utils.Permissions;
 import com.aymegike.huminekingdom.utils.managers.FileManager;
+import com.aymegike.huminekingdom.utils.managers.GloryManager;
 import com.aymegike.huminekingdom.utils.managers.KingdomManager;
 import com.aymegike.huminekingdom.utils.models.Grade;
 import com.aymegike.huminekingdom.utils.models.Kingdom;
@@ -34,6 +35,7 @@ public class HumineKingdom extends JavaPlugin {
 	
 	private static FileManager fileManager;
 	private static KingdomManager kManager;
+	private static GloryManager gloryManager;
 	
 	public void onEnable() {
 		System.out.println("-------------------------------------------");
@@ -43,6 +45,7 @@ public class HumineKingdom extends JavaPlugin {
 		new FileManager();
 		kManager = new KingdomManager();
 		new CommandManager(this);
+		gloryManager = new GloryManager();
 	}
 	
 	public void onDisable() {
@@ -100,14 +103,16 @@ public class HumineKingdom extends JavaPlugin {
 		return HumineKingdom.getPlayerGrade(player).getPermissions().contains(permission);
 	}
 	
+	public static GloryManager getGloryManager() {
+		return gloryManager;
+	}
+	
 	//ZONE PLAYER GESTION
 	
 	public static ZoneListener getZoneListener(Kingdom kingdom) {
 
 		return new ZoneListener() {
 
-			
-			
 			private void cancel(Player player, Event e) {
 				player.playSound(player.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, 5, 1);
 			}
